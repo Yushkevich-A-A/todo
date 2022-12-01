@@ -69,7 +69,8 @@ function ProjectPage(props) {
   }
 
   return (
-    <div>
+    <>
+    { project && <div>
       <Header title={project.name}>
         <input type="text" />
         <CreateButton handleClick={openModal}>добавить задачу</CreateButton>
@@ -92,6 +93,8 @@ function ProjectPage(props) {
         }
       </Main>
     </div>
+    }
+    </>
   )
 }
 

@@ -2,8 +2,15 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom"
 import ProjectsListPage from 'pages/ProjectsListPage';
 import ProjectPage from 'pages/ProjectPage';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({type: 'INIT_REQUEST'});
+  }, [])
 
   return (
     <Router>
