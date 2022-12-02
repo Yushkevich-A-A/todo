@@ -18,6 +18,7 @@ function serviceManageProject( state = initialState, action ) {
       return [...reloadProject];
     case "EDIT_PROJECT" :
       const { editedProject } = action.payload;
+      console.log(editedProject);
       const editProjectIndex = state.findIndex( item => item.id === editedProject.id);
       const newProjectsArray = cloneDeep(state);
       newProjectsArray.splice(editProjectIndex, 1, editedProject)

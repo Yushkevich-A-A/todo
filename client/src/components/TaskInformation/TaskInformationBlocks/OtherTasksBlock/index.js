@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import createAdditionalTask from 'lib/createAdditionalTask';
 import OtherTask from 'components/TaskInformation/TaskInformationBlocks/OtherTasksBlock/ChangeOtherTask';
 import Textarea from 'components/elements/Textarea';
-import cloneDeep from 'lodash/cloneDeep';
 import ButtonText from 'components/ButtonText';
+import { useDispatch } from 'react-redux';
 
 const Container = styled.div`
   padding: 15px;
@@ -24,36 +24,30 @@ const Title = styled.div`
 const TasksList = styled.div``;
 
 function OtherTasksBlock(props) {
-  const { task, project, sendData } = props;
-  const changinProject = cloneDeep(project);
-  const changinTask = changinProject.task_list.find( item => item.id === task.id )
+  const { task } = props;
+  const dispatch = useDispatch();
   const [  text, setText ] = useState('');
   const [ openAdd, setOpenAdd ] = useState(false);
+
+  useEffect( () => {
+    resetFieldText();
+  }, [task])
 
   const addOtherTask = () => {
     if (text.trim() === '') {
       return;
     }
-    const addNewOtherTask = createAdditionalTask(task.id, text);
-    changinTask.other_tasks.push(addNewOtherTask);
-    sendData(changinProject);
-    setText('');
-    setOpenAdd(false);
+    dispatch({ type: "ADD_ADDITIONAL_TASK_SAGA", payload: {
+      id_project: task.id_project,
+      id_main_task: task.id,
+      description: text,
+    } })
   }
 
   const handleChange = (e) => {
     setText(e.target.value);
   }
 
-  const handleDelete = (id) => {
-    changinTask.other_tasks.splice(changinTask.other_tasks.findIndex( item => item.id === id ), 1 );
-    sendData(changinProject);
-  }
-
-  const changeOtherTask = ( id, name, value ) => {
-    changinTask.other_tasks.find( item => item.id === id )[name] = value;
-    sendData(changinProject);
-  }
   const resetFieldText = () => {
     setText('');
     setOpenAdd(false);
@@ -64,7 +58,7 @@ function OtherTasksBlock(props) {
       <Title>Подзадачи</Title>
         <TasksList>
           {
-            task.other_tasks.map( item => <OtherTask key={item.id} other_task={item} handleChange={changeOtherTask} handleDelete={handleDelete}/>)
+            task.other_tasks.map( item => <OtherTask key={item.id} other_task={item} />)
           }
         </TasksList>
         {!openAdd && <ButtonText handleClick={() => setOpenAdd(true)}>Добавить элемент</ButtonText>}

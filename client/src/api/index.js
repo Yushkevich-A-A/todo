@@ -15,7 +15,7 @@ export async function putData(apiURL, body) {
   return response.data;
 }
 
-export async function deleteData(apiURL, body) {
-  const response = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/${apiURL}`, body);
+export async function deleteData(apiURL, data) {
+  const response = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/${apiURL}`, {data});
   return response.data;
 }

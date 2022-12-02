@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import arrow from 'assets/icons/arrow.svg';
 import cloneDeep from 'lodash/cloneDeep';
+import { useDispatch } from 'react-redux';
 
 const Container = styled.div`
 position: relative;`;
@@ -74,17 +75,20 @@ const Arrow = styled.div`
 
 function Priority(props) {
   const { task, project, sendData } = props;
+  const dispatch = useDispatch();
   const [ openMenu, setOpenMenu ] = useState(false);
 
   const order = ["low", "lower-middle", "middle", "up-middle", "high"];
 
   const handleChange = (priority) => {
-    if (priority !== task.priority) {
-      const changinProject = cloneDeep(project);
-      changinProject.task_list.find( item => item.id === task.id ).priority = priority;
-      sendData(changinProject);;
+    if (priority === task.priority) {
+      return;
     }
     setOpenMenu(false);
+    dispatch({
+      type: "CHANGE_PRIORITY_SAGA", 
+      payload: {id: task.id,  id_project: task.id_project,  priority: priority }
+    });
   }
 
   return (

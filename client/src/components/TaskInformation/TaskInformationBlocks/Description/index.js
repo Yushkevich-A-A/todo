@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components';
 import cloneDeep from 'lodash/cloneDeep';
+import { useDispatch } from 'react-redux';
 
 const Container = styled.div``;
 
@@ -30,13 +31,18 @@ const Textarea = styled.textarea`
 
 
 function Description(props) {
-  const { task, project, sendData } = props;
+  const { task } = props;
+  const dispatch = useDispatch();
   const [ description, setDescription ] = useState(task.description);
 
   const handleOnBlur = () => {
-    const changinProject = cloneDeep(project);
-    changinProject.task_list.find( item => item.id === task.id ).description = description;
-    sendData(changinProject);
+    if ( task.description === description ) {
+      return;
+    }
+    dispatch({
+      type: "CHANGE_DESCRIPTION_SAGA", 
+      payload: {id: task.id,  id_project: task.id_project,  description: description }
+    })
   }
 
   const handleChange = (e) => {

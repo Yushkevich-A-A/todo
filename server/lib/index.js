@@ -1,12 +1,11 @@
 const { v4: uuidv4 } = require('uuid');
 
 
-const createAdditionalTask = (id, data) => {
+const createAdditionalTask = (data) => {
   return {
+    ...data,
     id: uuidv4(),
     complete: false,
-    main_task_id: id,
-    description: data,
   }
 }
 

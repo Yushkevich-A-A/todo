@@ -5,7 +5,6 @@ function* workerAddPoroject() {
   while(true) {
     const action = yield take('ADD_PROJECT_SAGA');
     const newProject = yield call(postData, 'projects' , action.data );
-    console.log(newProject);
     yield put({ type:'CREATE_PROJECT', payload: { newProject }});
     
   }
