@@ -32,26 +32,21 @@ function FormCreateTask(props) {
     number: '', 
     name: '',
     description: '',
-    finish_date: format(new Date(), 'yyyy-MM-dd'),
-    priority: 'low',
-    files: null,
   })
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newTask = createNewTask(formData);
-    project.task_list.push(newTask);
-    project.columns.find( item => item.id === 'queue').tasks.push(newTask.id);
-    dispatch(editProject(project));
+    dispatch({type: 'ADD_TASK_SAGA', payload: formData});
     closeModal();
   } 
 
 
   const handleChange = (e) => {
     const name = e.target.name;
-    const value = (name === 'files') ? e.target.files[0] :
-                  (name === 'finish_date') ? getTime(parse(e.target.value, 'yyyy-MM-dd', new Date())) :
-                  e.target.value;
+    const value = e.target.value
+    // (name === 'files') ? e.target.files[0] :
+    //               (name === 'finish_date') ? getTime(parse(e.target.value, 'yyyy-MM-dd', new Date())) :
+    //               e.target.value;
     setFormData( (state) => ({...state, [name]: value}));
   }
 
@@ -60,9 +55,9 @@ function FormCreateTask(props) {
       <InputText name='number' title='Номер' placeholder="введите номер задачи"  handleChange={handleChange}/>
       <InputText name='name' title='Заголовок' placeholder="Введите заголовок"  handleChange={handleChange}/>
       <InputText name='description' title='Описание' placeholder="Опишите задачу"  handleChange={handleChange}/>
-      <InputDate name='finish_date' title='Выполнить до'  handleChange={handleChange} />
+      {/* <InputDate name='finish_date' title='Выполнить до'  handleChange={handleChange} />
       <InputSelect name='priority' title='Приоритет'  handleChange={handleChange}/>
-      <InputFiles name='files' title='Прикрепите файлы'  handleChange={handleChange}/>
+      <InputFiles name='files' title='Прикрепите файлы'  handleChange={handleChange}/> */}
       <ButtonBlock>
         <FormButton title="Создать" handleClick={handleSubmit}/>
       </ButtonBlock>

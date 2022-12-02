@@ -1,8 +1,8 @@
-import { put, fork } from 'redux-saga/effects';
+import { put, fork, all, call } from 'redux-saga/effects';
 import { getData } from 'api';
 
 function* loadData() {
-  const data = yield fork(getData, 'projects');
+  const data = yield call(getData, 'projects');
   yield put({ type:'SET_INIT_DATA', payload: { data }});
 }
 

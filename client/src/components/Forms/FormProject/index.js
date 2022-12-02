@@ -21,7 +21,7 @@ function FormProject(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createProject({...form}));
+    dispatch({type: 'ADD_PROJECT_SAGA', data: form});
     closeModal();
   }
 

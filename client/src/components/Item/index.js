@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import Button from 'components/Button'
+import { useDispatch } from 'react-redux'
 
 const ItemElement = styled.div`
   border: 1px solid #c4c4c4;
@@ -18,11 +20,19 @@ const ItemElement = styled.div`
 `
 
 function Item(props) {
-  const { item, handleClick } = props
+  const { item, handleClick } = props;
+  const dispatch = useDispatch();
+
+  const handleDeleteClick = (e) => {
+    e.stopPropagation();
+
+    dispatch({type: "DELETE_PROJECT_SAGA", payload: { id: item.id}});
+  } 
 
   return (
     <ItemElement onClick={() => handleClick(item.id)}>
       {item.name}
+      <Button type='delete' handleClick={handleDeleteClick}/>
     </ItemElement>
   )
 }
