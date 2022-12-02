@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components';
 import { useSelector } from 'react-redux';
-// import isEqual from 'lodash';
 import BlockName from 'components/TaskInformation/TaskInformationBlocks/Name';
 import Description from 'components/TaskInformation/TaskInformationBlocks/Description';
 import Priority from 'components/TaskInformation/TaskInformationBlocks/Priority';

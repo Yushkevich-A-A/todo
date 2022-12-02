@@ -1,5 +1,5 @@
 import { deleteData, postData, putData } from 'api';
-import { call, take, put, takeEvery, fork, all, spawn } from 'redux-saga/effects';
+import { call, take, put, takeEvery, fork, all, spawn, takeLatest } from 'redux-saga/effects';
 
 function* workerAddTask() {
   while(true) {
@@ -11,27 +11,24 @@ function* workerAddTask() {
 
 // проработать ручку изменения проекта
 
-// function* workerEditPoroject() {
+function* workerChangeColumns(action) {
+  yield fork(putData, 'task/columns' , action.payload );
+  yield put({ type:'DND_EFFECT_PROJECT', payload: action.payload});
+}
+
+
+// function* workerAddTask() {
 //   while(true) {
-//     const action = yield take('EDIT_PROJECT_SAGA');
-//     const newProject = yield call(putData, 'projects' , action.data );
-//     yield put({ type:'EDIT_PROJECT', payload: { newProject }});
-    
+//     const action = yield take('ADD_TASK_SAGA');
+//     const editedProject = yield call(postData, 'task' , action.payload );
+//     yield put({ type:'EDIT_PROJECT', payload: { editedProject }});
 //   }
 // }
 
-// function* workerDeletePoroject() {
-//   while(true) {
-//     const action = yield take('DELETE_PROJECT_SAGA');
-//     const reloadProject = yield call(deleteData, 'projects' , action.id );
-//     yield put({ type:'DELETE_PROJECT', payload: { reloadProject }});
-    
-//   }
-// }
 
 export default function* whatchSelectedProject () {
   yield all([
-      call(workerAddTask)
-      // call(workerDeletePoroject)
+      call(workerAddTask),
+      takeLatest('EDIT_COLUMNS_SAGA', workerChangeColumns)
     ])
 }

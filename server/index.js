@@ -53,14 +53,12 @@ app.delete('/api/task', (req, res) => {
   res.send(edittingProject);
 });
 
-// ручки изменения задачи
+// ручки изменения колонок задач проекта
 
-app.put('/api/task', (req, res) => {
-  const newTask = createNewTask(req.body);
+app.put('/api/task/columns', (req, res) => {
   const edittingProject = db.find( item => item.id === req.body.id_project );
-  edittingProject.task_list.push(newTask);
-  edittingProject.columns[0].tasks.push(newTask.id);
-  res.send(edittingProject);
+  edittingProject.columns = req.body.columns;
+  res.status(200).send('success');
 });
 
 

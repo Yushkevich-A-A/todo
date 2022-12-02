@@ -26,7 +26,7 @@ const BlockLists = styled.div`
 function ProjectPage(props) {
   const { id } = useParams();
   const projects = useSelector( state => state.manageProject);
-  const project = cloneDeep(projects.find( item => item.id === id));
+  const project = projects.find( item => item.id === id);
   const dispatch = useDispatch();
   const [ isOpen, setOpenModal ] = useState(false);
 
@@ -51,7 +51,7 @@ function ProjectPage(props) {
         return;
       }
 
-    const newColumns = project.columns;
+    const newColumns = cloneDeep(project.columns);
     const start = newColumns.find( item => item.id === source.droppableId )
     const finish = newColumns.find( item => item.id === destination.droppableId )
 
@@ -59,13 +59,13 @@ function ProjectPage(props) {
       const newTaskIds = newColumns.find( item => item.id === source.droppableId ).tasks;
       newTaskIds.splice( source.index, 1);
       newTaskIds.splice( destination.index, 0, draggableId);
-      dispatch(editProject(project));
+      dispatch({ type: 'EDIT_COLUMNS_SAGA', payload: { id_project: project.id, columns: newColumns}});
       return;
     }
 
     start.tasks.splice(source.index, 1);
     finish.tasks.splice(destination.index, 0, draggableId);
-    dispatch(editProject(project));
+    dispatch({ type: 'EDIT_COLUMNS_SAGA', payload: { id_project: project.id, columns: newColumns}});
   }
 
   return (
