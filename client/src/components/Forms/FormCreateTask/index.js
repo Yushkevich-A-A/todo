@@ -1,55 +1,66 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components';
-// import InputText from 'components/InputText';
-// import FormButton from 'components/FormButton';
+import Input from 'components/elements/Input';
 import { useDispatch } from 'react-redux';
+import ButtonText from 'components/ButtonText';
 
-const Form = styled.form`
-  background-color: white;
-  padding-top: 10px;
-  min-height: 200px;
-  min-width: 200px;
-  width: 500px;
-`;
+const FormBlock = styled.div`
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 5px;
+`
 
-const ButtonBlock = styled.div`
-  text-align: right;
+const InputBlock = styled.div`
+  &:nth-child( n + 2) {
+    margin-top: 5px;
+  }
+`
+
+const Label = styled.label`
+  font-size: 14px;
+  font-weight: 600;
 `;
 
 
 function FormCreateTask(props) {
-  // const { project, closeModal } = props;
-  // const dispatch = useDispatch();
-  // const [ formData, setFormData ] = useState({
-  //   id_project: project.id,
-  //   number: '', 
-  //   name: '',
-  //   description: '',
-  // })
+  const { project, column_id, closeHandler } = props;
+  const dispatch = useDispatch();
+  const [ formTask, setFormTask ] = useState({
+    // number: Math.max(...project.task_list.map( item => item.number )) + 1,
+    name: '',
+  });
 
-  const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   dispatch({type: 'ADD_TASK_SAGA', payload: formData});
-  //   closeModal();
+  const handleAddTask = () => {
+    dispatch({ type: 'CREATE_NEW_TASK_SAGA', payload: {
+      column_id: column_id,
+      id_project: project.id,
+      data: formTask,
+    }})
+    closeHandler();
+  }
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setFormTask( state => ({...state, [name]: value}))
   } 
 
-
-  // const handleChange = (e) => {
-  //   const name = e.target.name;
-  //   const value = e.target.value;
-  //   setFormData( (state) => ({...state, [name]: value}));
-  // }
-
   return (
-    <Form onSubmit={handleSubmit}>
-      {/* <InputText name='number' title='Номер' placeholder="введите номер задачи"  handleChange={handleChange}/>
-      <InputText name='name' title='Заголовок' placeholder="Введите заголовок"  handleChange={handleChange}/>
-      <InputText name='description' title='Описание' placeholder="Опишите задачу"  handleChange={handleChange}/>
-      <ButtonBlock>
-        <FormButton title="Создать" handleClick={handleSubmit}/>
-      </ButtonBlock> */}
-    </Form>
+    <FormBlock>
+      <div>
+        {/* <InputBlock>
+          <Label >Номер</Label>
+          <Input type='number' value={formTask.number} name='number' handleChange={handleChange} placeholder='введите номер'/>
+        </InputBlock> */}
+        <InputBlock>
+          <Label htmlFor='name'>Название новой задачи</Label>
+          <Input type='text' value={formTask.name} name='name' handleChange={handleChange} placeholder='введите название'/>
+        </InputBlock>
+      </div>
+      <ButtonText type="add" handleClick={handleAddTask}>Добавить задачу</ButtonText>
+    </FormBlock>
   )
 }
 

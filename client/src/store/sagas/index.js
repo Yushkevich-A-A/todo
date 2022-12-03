@@ -1,7 +1,7 @@
 import { call, all, spawn } from 'redux-saga/effects';
 import loadBasicData from 'store/sagas/loadBasicData';
 import watchProjects from 'store/sagas/watchProjects';
-import whatchSelectedProject from 'store/sagas/whatchSelectedProject';
+import whatchSelectedProject from 'store/sagas/watchSelectedProject';
 
 
 

@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ItemTask from 'components/ItemTask';
 import { Droppable } from 'react-beautiful-dnd';
+import ButtonText from 'components/ButtonText';
+import { useDispatch } from 'react-redux';
+import FormCreateTask from 'components/Forms/FormCreateTask';
 
 const TaskListWrapper = styled.div`
   border: 1px solid grey;
@@ -21,8 +24,18 @@ const BlockList = styled.div`
   min-height: 100px;
 `;
 
+const BlockAddTask = styled.div`
+  padding: 10px;
+
+`;
+
 function TasksList(props) {
-  const { column, tasks } = props;
+  const { column, tasks, project } = props;
+  const [ openAdd, setOpenAdd ] = useState(false);
+
+  const closeForm = () => {
+    setOpenAdd(false)
+  }
 
   return (
     <TaskListWrapper>

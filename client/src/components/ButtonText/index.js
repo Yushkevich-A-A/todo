@@ -24,7 +24,7 @@ const ButtonType = styled.div`
     }
   }}
 
-  width: ${ props => props.width || 'auto'};
+  min-width: 150px;
   text-align: center;
   white-space: nowrap;
   border-radius: 5px;
@@ -38,7 +38,7 @@ function ButtonText(props) {
   const { type, handleClick, width } = props;
 
   return (
-    <ButtonType width={width} type={type} onClick={handleClick}>
+    <ButtonType type={type} onClick={handleClick}>
       {
         props.children
       }

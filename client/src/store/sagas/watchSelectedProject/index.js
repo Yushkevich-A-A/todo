@@ -1,18 +1,18 @@
 import { deleteData, postData, postDataForm, putData } from 'api';
-import { call, take, put, fork, all, takeLatest, takeLeading } from 'redux-saga/effects';
+import { call, put, fork, all, takeLatest, takeLeading } from 'redux-saga/effects';
 
-function* workerAddTask() {
-  while(true) {
-    const action = yield take('ADD_TASK_SAGA');
-    const editedProject = yield call(postData, 'task' , action.payload );
-    yield put({ type:'EDIT_PROJECT', payload: { editedProject }});
-  }
+function* workerAddTask(action) {
+  const editedProject = yield call(postData, 'task' , action.payload );
+
+  yield put({ type:'EDIT_PROJECT', payload: { editedProject }});
 }
 
 // проработать ручку изменения проекта
 
 function* workerChangeColumns(action) {
+  debugger;
   yield fork(putData, 'task/columns' , action.payload );
+
   yield put({ type:'DND_EFFECT_PROJECT', payload: action.payload});
 }
 
@@ -64,7 +64,7 @@ function* workerDeleteFilesTask(action) {
 
 export default function* whatchSelectedProject () {
   yield all([
-      call(workerAddTask),
+      takeLatest('CREATE_NEW_TASK_SAGA', workerAddTask),
       takeLatest('EDIT_COLUMNS_SAGA', workerChangeColumns),
       takeLatest("CHANGE_NAME_SAGA", workerChangeName),
       takeLatest("CHANGE_DESCRIPTION_SAGA", workerChangeDescription),
