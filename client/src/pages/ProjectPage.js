@@ -79,6 +79,7 @@ function ProjectPage(props) {
         <DragDropContext onDragEnd={onDragEnd}>
           <BlockLists>
             {
+              
               project.columns.map( column => <TasksList key={column.id} column={column} tasks={
                   column.tasks.map( item => project.task_list.find( task => task.id === item) )
                 }/>

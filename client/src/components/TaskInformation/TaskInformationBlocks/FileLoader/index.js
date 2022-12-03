@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components';
 import ButtonText from 'components/ButtonText';
 import cloneDeep from 'lodash/cloneDeep';
+import { useDispatch } from 'react-redux';
 
 const Form = styled.form`
   margin-top: 20px;
@@ -22,55 +23,46 @@ const FileItem = styled.img`
 
 
 function FileLoader(props) {
-  const { task, project, sendData } = props;
-  const [ files, setFiles ] = useState([]);
+  const { task} = props;
+  const [ file, setFiles ] = useState([]);
+  const dispatch = useDispatch();
   const ref = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // const changinProject = cloneDeep(project);
-    // changinProject.task_list.find( item => item.id === task.id ).files = files;
-    // console.log(files);
-    // sendData(changinProject);
   }
 
   const handlerChange = (e) => {
-    const filesData = e.target.files
-    if ( filesData === 0 ) {
+    if ( e.target.files.length === 0 ) {
       return;
     }
-
-    for (let a = 0; a < filesData.length; a++) {
-      const reader = new FileReader();
-      reader.readAsDataURL(filesData[a]);
-
-      reader.addEventListener("load", () => {
-        setFiles(state => ([...state, reader.result]));
-      }, false);
-    }
+    setFiles(e.target.files[0]);
   }
 
   const handlerLoadFiles = () => {
-    const changinProject = cloneDeep(project);
-    changinProject.task_list.find( item => item.id === task.id ).files = files;
-    console.log(ref);
-    sendData(changinProject);
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('id_project', task.id_project,);
+    formData.append('id', task.id);
+    dispatch({ type: "ADD_FILES_TASK_SAGA", payload: formData});
+    ref.current.reset();
+    setFiles([]);
   }
 
   return (
     <div>
-      <Form onSubmit={handleSubmit} method="post" action="#" id="#">
+      <Form ref={ref} onSubmit={handleSubmit} method="post" action="#" id="#">
             <div>
               <div>
                 <label>Прикрепите файлы </label>
-                <input ref={ref} type="file" onChange={handlerChange} multiple={true}/>
+                <input type="file" onChange={handlerChange}/>
               </div>
             </div>
-            {files.length !== 0 && <ButtonText type='add' handleClick={handlerLoadFiles}>Загрузить</ButtonText>}
+            {file.length !== 0 && <ButtonText type='add' handleClick={handlerLoadFiles}>Загрузить</ButtonText>}
       </Form>
       <FilesPreview>
         {
-          task.files.map( ( item, index ) => <FileItem key={index} src={item}/> )
+          task.files.map( ( item, index ) => <FileItem key={item.path} src={`${process.env.REACT_APP_SERVER_URL}${item.path}`}/> )
         }
       </FilesPreview>
     </div>

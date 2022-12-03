@@ -25,8 +25,7 @@ function Item(props) {
 
   const handleDeleteClick = (e) => {
     e.stopPropagation();
-
-    dispatch({type: "DELETE_PROJECT_SAGA", payload: { id: item.id}});
+    dispatch({ type: "DELETE_PROJECT_SAGA", payload: { id: item.id } });
   } 
 
   return (

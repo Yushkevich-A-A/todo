@@ -1,12 +1,12 @@
 const db = [
   { 
-    id: 'ob5hAYtP5P0olajRvbmiN',
+    id: 'ob5hAYt',
     name: "Проект 1",
     desription: "тестовый проект создания TODO лист",
     task_list: [
       {
-        id: "7nKdnQIP8bFqZEqHPph2m",
-        id_project: 'ob5hAYtP5P0olajRvbmiN',
+        id: "7nKdnQ",
+        id_project: 'ob5hAYt',
         number: 1, 
         name: "ПРиведи друга",
         description: "В этой задаче нет победителей",
@@ -18,8 +18,8 @@ const db = [
         comments: [],
       },
       {
-        id: "7nKdnQI5bFqZEqHPph2m",
-        id_project: 'ob5hAYtP5P0olajRvbmiN',
+        id: "nQI5bFqZEqHPph2m",
+        id_project: 'ob5hAYt',
         number: 2, 
         name: "Купить хлеба",
         description: "ПРосто сходи в магазин",
@@ -31,8 +31,8 @@ const db = [
         comments: [],
       },
       {
-        id: "7nKdnQIP8bFqZEq2HPph2m",
-        id_project: 'ob5hAYtP5P0olajRvbmiN',
+        id: "qZEq2HPph2m",
+        id_project: 'ob5hAYt',
         number: 3, 
         name: "Создай todo list",
         description: "листик",
@@ -45,8 +45,8 @@ const db = [
       }
       ,
       {
-        id: "7nKdnQIP548bFqZEqHPph2m",
-        id_project: 'ob5hAYtP5P0olajRvbmiN',
+        id: "48bFqZEq",
+        id_project: 'ob5hAYt',
         number: 4, 
         name: "Еще задачка",
         description: "задачка",
@@ -61,7 +61,7 @@ const db = [
     columns: [
       {
         id: 'queue',
-        tasks: ["7nKdnQIP8bFqZEqHPph2m", "7nKdnQI5bFqZEqHPph2m", "7nKdnQIP8bFqZEq2HPph2m", "7nKdnQIP548bFqZEqHPph2m", ]
+        tasks: ["7nKdnQ", "nQI5bFqZEqHPph2m", "qZEq2HPph2m", "48bFqZEq", ]
       },
       {
         id: 'development',

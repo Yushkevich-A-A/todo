@@ -1,5 +1,5 @@
 import { deleteData, postData, putData } from 'api';
-import { call, take, put, takeEvery, fork, all, spawn } from 'redux-saga/effects';
+import { call, take, put, takeEvery, fork, all, spawn, takeLeading } from 'redux-saga/effects';
 
 function* workerAddPoroject() {
   while(true) {
@@ -21,18 +21,25 @@ function* workerAddPoroject() {
 //   }
 // }
 
-function* workerDeletePoroject() {
-  while(true) {
-    const action = yield take('DELETE_PROJECT_SAGA');
-    const reloadProject = yield call(deleteData, 'projects' , action.id );
-    yield put({ type:'DELETE_PROJECT', payload: { reloadProject }});
+function* workerDeletePoroject(action) {
+  // while(true) {
+  //   const action = yield take('DELETE_PROJECT_SAGA');
+  //   const reloadProject = yield call(deleteData, 'projects' , action.id );
+  //   yield put({ type:'DELETE_PROJECT', payload: { reloadProject }});
     
-  }
+  // }
+  const reloadProject = yield call(deleteData, 'projects', action.payload );
+  yield put({ type:'DELETE_PROJECT', payload: { reloadProject }});
+}
+
+function* workerDeleteAdditionalTask(action) {
+  const editedProject = yield call(deleteData, 'task/additional', action.payload );
+  yield put({ type:'EDIT_PROJECT', payload: { editedProject }});
 }
 
 export default function* watchProjects () {
   yield all([
       call(workerAddPoroject),
-      call(workerDeletePoroject)
+      takeLeading('DELETE_PROJECT_SAGA', workerDeletePoroject)
     ])
 }

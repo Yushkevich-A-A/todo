@@ -10,6 +10,19 @@ export async function postData(apiURL, body) {
   return response.data;
 }
 
+export async function postDataForm(apiURL, data) {
+  const response = await axios.post(
+    `${process.env.REACT_APP_SERVER_URL}/api/${apiURL}`, 
+    data,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }
+  );
+  return response.data;
+}
+
 export async function putData(apiURL, body) {
   const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api/${apiURL}`, body);
   return response.data;

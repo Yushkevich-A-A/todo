@@ -1,4 +1,4 @@
-import { deleteData, postData, putData } from 'api';
+import { deleteData, postData, postDataForm, putData } from 'api';
 import { call, take, put, takeEvery, fork, all, spawn, takeLatest, takeLeading } from 'redux-saga/effects';
 
 function* workerAddTask() {
@@ -48,6 +48,15 @@ function* workerDeleteAdditionalTask(action) {
   yield put({ type:'EDIT_PROJECT', payload: { editedProject }});
 }
 
+// отправка файлов на сервер
+
+function* workerAddFilesTask(action) {
+  console.log(action.payload );
+  const editedProject = yield call(postDataForm, 'task/files' , action.payload );
+  debugger;
+  yield put({ type:'EDIT_PROJECT', payload: { editedProject }});
+}
+
 
 export default function* whatchSelectedProject () {
   yield all([
@@ -59,5 +68,7 @@ export default function* whatchSelectedProject () {
       takeLeading("ADD_ADDITIONAL_TASK_SAGA", workerAddAdditionalTask),
       takeLatest("CHANGE_ADDITIONAL_TASK_SAGA", workerChangeAdditionalTask),
       takeLeading("DELETE_ADDITIONAL_TASK_SAGA", workerDeleteAdditionalTask),
+      takeLeading("ADD_FILES_TASK_SAGA", workerAddFilesTask),
+      // takeLeading("DELETE_ADDITIONAL_TASK_SAGA", workerDeleteAdditionalTask),
     ])
 }

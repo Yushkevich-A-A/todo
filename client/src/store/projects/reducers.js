@@ -11,21 +11,18 @@ function serviceManageProject( state = initialState, action ) {
       return [ ...data ];
     case "CREATE_PROJECT" :
       const { newProject } = action.payload;
-      const initDataProject = createNewProject( newProject );
-      return [...state, { ...initDataProject }];
+      return [...state, { ...newProject }];
     case "DELETE_PROJECT" :
       const { reloadProject } = action.payload;
       return [...reloadProject];
     case "EDIT_PROJECT" :
       const { editedProject } = action.payload;
-      console.log(editedProject);
       const editProjectIndex = state.findIndex( item => item.id === editedProject.id);
       const newProjectsArray = cloneDeep(state);
       newProjectsArray.splice(editProjectIndex, 1, editedProject)
       return [...newProjectsArray];
     case "DND_EFFECT_PROJECT" :
         const { id_project, columns } = action.payload;
-        // debugger;
         const indexChangingColumns = state.findIndex( item => item.id === id_project);
         const projects = cloneDeep(state);
         projects[indexChangingColumns].columns = columns;
