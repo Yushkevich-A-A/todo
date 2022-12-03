@@ -10,9 +10,7 @@ function* workerAddTask(action) {
 // проработать ручку изменения проекта
 
 function* workerChangeColumns(action) {
-  debugger;
   yield fork(putData, 'task/columns' , action.payload );
-
   yield put({ type:'DND_EFFECT_PROJECT', payload: action.payload});
 }
 

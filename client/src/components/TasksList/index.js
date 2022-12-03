@@ -56,6 +56,11 @@ function TasksList(props) {
           </BlockList>
          )}
       </Droppable>
+      <BlockAddTask>
+        { !openAdd && <ButtonText handleClick={() => setOpenAdd(true)}>Создать задачу</ButtonText>}
+        { openAdd && <FormCreateTask closeHandler={closeForm} column_id={column.id} project={project}/>
+        }
+      </BlockAddTask>
     </TaskListWrapper>
   )
 }

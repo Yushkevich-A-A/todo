@@ -106,7 +106,7 @@ function ProjectPage() {
           <BlockLists>
             {
               project.columns.map( column => <TasksList key={column.id} column={column} project={project} tasks={
-                  filterList.filter( item => column.tasks.find( task => task === item.id))
+                column.tasks.map( item => filterList.find( task => task.id === item)).filter(item => item )
                 }/>
               )
             }
