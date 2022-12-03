@@ -5,7 +5,7 @@ const app = express();
 const cors = require('cors');
 const port = process.env.PORT || 3001;
 const { db } = require('./database');
-const {createNewProject, createNewTask, createAdditionalTask } = require('./lib');
+const {createNewProject, createNewTask, createAdditionalTask, createFileObj } = require('./lib');
 
 
 app.use(fileUpload({createParentPath: true}));
@@ -140,7 +140,17 @@ app.post('/api/task/files', (req, res) => {
   let file = req.files.file;
 
   const format = file.mimetype.split('/')[1];
-  const path = `/public/folders/${req.body.id_project}/${req.body.id}/${ Date.now() + '.' + format}`;
+  const fileName = Date.now() + '.' + format;
+  const path = `/public/folders/${req.body.id_project}/${req.body.id}/${fileName}`;
+
+  const newFileData = createFileObj({
+    path: path,
+    name: fileName,
+    size: file.size,
+    id_project: req.body.id_project,
+    id_main_task: req.body.id,
+
+  })
 
   file.mv(__dirname + path, function(err) {
     if (err)
@@ -148,17 +158,20 @@ app.post('/api/task/files', (req, res) => {
 
     const edittingProject = db.find( item => item.id === req.body.id_project );
     const edittingTask = edittingProject.task_list.find( item => item.id === req.body.id);
-    edittingTask.files.push({ path: path});
+    edittingTask.files.push(newFileData);
     res.send(edittingProject);
   });
 });
 
 app.delete('/api/task/files', (req, res) => {
   const edittingProject = db.find( item => item.id === req.body.id_project );
-  const edittingTask = edittingProject.task_list.find( item => item.id === req.body.id);
-  const deleteImageIndex =  edittingTask.files.findIndex( item => item.path === req.body.path)
-  edittingTask.other_tasks.splice(deleteOtherTaskIndex, 1)
-  res.send(edittingProject);
+  const edittingTask = edittingProject.task_list.find( item => item.id === req.body.id_main_task);
+  const deleteImageIndex =  edittingTask.files.findIndex( item => item.id === req.body.id)
+  edittingTask.files.splice(deleteImageIndex, 1);
+    fs.unlink(`${__dirname}${req.body.path}`,function(err){
+      if(err) return console.log(err);
+      res.send(edittingProject);
+  });  
 });
 
 

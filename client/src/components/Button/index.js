@@ -34,10 +34,6 @@ const ButtonType = styled.div`
           return css`
             background-image: url(${edit});
           `
-        case 'save':
-          return css`
-            background-image: url(${save});
-          `
       }
     }
   }

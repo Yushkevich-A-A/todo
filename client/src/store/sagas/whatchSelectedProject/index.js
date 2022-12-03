@@ -53,10 +53,14 @@ function* workerDeleteAdditionalTask(action) {
 function* workerAddFilesTask(action) {
   console.log(action.payload );
   const editedProject = yield call(postDataForm, 'task/files' , action.payload );
-  debugger;
   yield put({ type:'EDIT_PROJECT', payload: { editedProject }});
 }
 
+function* workerDeleteFilesTask(action) {
+  console.log(action.payload );
+  const editedProject = yield call(deleteData, 'task/files' , action.payload );
+  yield put({ type:'EDIT_PROJECT', payload: { editedProject }});
+}
 
 export default function* whatchSelectedProject () {
   yield all([
@@ -69,6 +73,6 @@ export default function* whatchSelectedProject () {
       takeLatest("CHANGE_ADDITIONAL_TASK_SAGA", workerChangeAdditionalTask),
       takeLeading("DELETE_ADDITIONAL_TASK_SAGA", workerDeleteAdditionalTask),
       takeLeading("ADD_FILES_TASK_SAGA", workerAddFilesTask),
-      // takeLeading("DELETE_ADDITIONAL_TASK_SAGA", workerDeleteAdditionalTask),
+      takeLeading("DELETE_FILE_TASK_SAGA", workerDeleteFilesTask),
     ])
 }

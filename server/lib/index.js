@@ -45,8 +45,17 @@ function createNewTask(data) {
   return odj;
 } 
 
+function createFileObj(data) {
+  const odj = {
+    ...data,
+    id: uuidv4(),
+  }
+  return odj;
+} 
+
 module.exports = {
   createAdditionalTask,
   createNewProject,
   createNewTask,
+  createFileObj,
 }

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import ButtonText from 'components/ButtonText';
 import cloneDeep from 'lodash/cloneDeep';
 import { useDispatch } from 'react-redux';
+import FileItemPreview from 'components/TaskInformation/TaskInformationBlocks/FileLoader/FileItemPreview';
 
 const Form = styled.form`
   margin-top: 20px;
@@ -13,12 +14,6 @@ const FilesPreview = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
-`
-
-const FileItem = styled.img`
-  display: block;
-  width: 200px;
-  margin: 10px;
 `
 
 
@@ -62,7 +57,7 @@ function FileLoader(props) {
       </Form>
       <FilesPreview>
         {
-          task.files.map( ( item, index ) => <FileItem key={item.path} src={`${process.env.REACT_APP_SERVER_URL}${item.path}`}/> )
+          task.files.map( ( item, index ) => <FileItemPreview key={item.id} item={item}/> )
         }
       </FilesPreview>
     </div>
