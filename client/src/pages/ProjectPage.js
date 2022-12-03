@@ -3,12 +3,12 @@ import { useParams } from 'react-router-dom'
 import Header from 'components/Header';
 import CreateButton from 'components/CreateButton';
 import { useSelector } from 'react-redux';
-import ModalWindow from 'components/ModalWindow';
+// import ModalWindow from 'components/ModalWindow';
 import styled from 'styled-components';
 import TasksList from 'components/TasksList';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { useDispatch } from 'react-redux';
-import FormCreateTask from 'components/Forms/FormCreateTask';
+// import FormCreateTask from 'components/Forms/FormCreateTask';
 import cloneDeep from 'lodash/cloneDeep';
 import ButtonText from 'components/ButtonText';
 import Input from 'components/elements/Input';
@@ -33,7 +33,7 @@ function ProjectPage() {
   const projects = useSelector( state => state.manageProject);
   const project = projects.find( item => item.id === id);
   const dispatch = useDispatch();
-  const [ isOpen, setOpenModal ] = useState(false);
+  // const [ isOpen, setOpenModal ] = useState(false);
   const [ search, setSearch ] = useState('name');
   const [ filter, setFilter ] = useState('');
   const [ filterList, setFilterList ] = useState([]);
@@ -55,11 +55,11 @@ function ProjectPage() {
   } 
 
   const closeModalWindow = () => {
-    setOpenModal(false)
+    // setOpenModal(false)
   }
 
   const openModal = (e) => {
-    setOpenModal(true);
+    // setOpenModal(true);
   }
 
   const searchTrigger = () => {

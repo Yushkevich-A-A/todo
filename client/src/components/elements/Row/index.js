@@ -17,6 +17,8 @@ const Container = styled.div`
         return css`
           justify-content: flex-end;
         `
+      default: 
+        return;
     }
   }}
 `;

@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components';
 import ButtonText from 'components/ButtonText';
-import cloneDeep from 'lodash/cloneDeep';
 import { useDispatch } from 'react-redux';
 import FileItemPreview from 'components/TaskInformation/TaskInformationBlocks/FileLoader/FileItemPreview';
 

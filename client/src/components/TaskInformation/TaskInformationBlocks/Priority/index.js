@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import arrow from 'assets/icons/arrow.svg';
-import cloneDeep from 'lodash/cloneDeep';
 import { useDispatch } from 'react-redux';
 
 const Container = styled.div`

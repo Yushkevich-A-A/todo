@@ -1,5 +1,5 @@
 import { deleteData, postData, postDataForm, putData } from 'api';
-import { call, take, put, takeEvery, fork, all, spawn, takeLatest, takeLeading } from 'redux-saga/effects';
+import { call, take, put, fork, all, takeLatest, takeLeading } from 'redux-saga/effects';
 
 function* workerAddTask() {
   while(true) {

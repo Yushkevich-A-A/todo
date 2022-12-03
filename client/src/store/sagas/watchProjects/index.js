@@ -1,5 +1,5 @@
-import { deleteData, postData, putData } from 'api';
-import { call, take, put, takeEvery, fork, all, spawn, takeLeading } from 'redux-saga/effects';
+import { deleteData, postData } from 'api';
+import { call, take, put, all, takeLeading } from 'redux-saga/effects';
 
 function* workerAddPoroject() {
   while(true) {
@@ -30,11 +30,6 @@ function* workerDeletePoroject(action) {
   // }
   const reloadProject = yield call(deleteData, 'projects', action.payload );
   yield put({ type:'DELETE_PROJECT', payload: { reloadProject }});
-}
-
-function* workerDeleteAdditionalTask(action) {
-  const editedProject = yield call(deleteData, 'task/additional', action.payload );
-  yield put({ type:'EDIT_PROJECT', payload: { editedProject }});
 }
 
 export default function* watchProjects () {

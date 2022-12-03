@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
-import createAdditionalTask from 'lib/createAdditionalTask';
+import styled from 'styled-components'
 import OtherTask from 'components/TaskInformation/TaskInformationBlocks/OtherTasksBlock/ChangeOtherTask';
 import Textarea from 'components/elements/Textarea';
 import ButtonText from 'components/ButtonText';

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components';
+import styled  from 'styled-components';
 import BlockName from 'components/TaskInformation/TaskInformationBlocks/Name';
 import Description from 'components/TaskInformation/TaskInformationBlocks/Description';
 import Priority from 'components/TaskInformation/TaskInformationBlocks/Priority';
@@ -16,23 +16,6 @@ const Container = styled.div`
   width: 700px;
 `;
 
-const Row = styled.div`
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  ${(props) => {
-    switch( props.type ) {
-      case 'between':
-        return css`
-          justify-content: space-between;
-        `
-      case 'end':
-        return css`
-          justify-content: flex-end;
-        `
-    }
-  }}
-`;
 function ItemInformation(props) {
   const { task } = props;
 
