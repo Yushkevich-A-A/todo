@@ -27,6 +27,9 @@ function FormButton(props) {
   )
 }
 
-FormButton.propTypes = {}
+FormButton.propTypes = {
+  title: PropTypes.string,
+  handleClick: PropTypes.func.isRequired,
+}
 
 export default FormButton

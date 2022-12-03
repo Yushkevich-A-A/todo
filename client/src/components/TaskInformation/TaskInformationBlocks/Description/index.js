@@ -58,7 +58,9 @@ function Description(props) {
   )
 }
 
-Description.propTypes = {}
+Description.propTypes = {
+  task: PropTypes.object.isRequired
+}
 
 export default Description
 

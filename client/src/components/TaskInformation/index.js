@@ -48,6 +48,8 @@ function ItemInformation(props) {
   )
 }
 
-ItemInformation.propTypes = {}
+ItemInformation.propTypes = {
+  task: PropTypes.object.isRequired
+}
 
 export default ItemInformation

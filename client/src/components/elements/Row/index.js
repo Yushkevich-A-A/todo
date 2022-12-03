@@ -32,6 +32,8 @@ function Row(props) {
   )
 }
 
-Row.propTypes = {}
+Row.propTypes = {
+  type: PropTypes.string,
+}
 
 export default Row

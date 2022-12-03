@@ -68,6 +68,8 @@ function OtherTask(props) {
   )
 }
 
-OtherTask.propTypes = {}
+OtherTask.propTypes = {
+  other_task: PropTypes.object.isRequired
+}
 
 export default OtherTask

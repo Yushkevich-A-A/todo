@@ -25,6 +25,8 @@ function ListProject(props) {
   )
 }
 
-ListProject.propTypes = {}
+ListProject.propTypes = {
+  list: PropTypes.array.isRequired,
+}
 
 export default ListProject;

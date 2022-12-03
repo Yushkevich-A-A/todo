@@ -47,6 +47,9 @@ function TasksList(props) {
   )
 }
 
-TasksList.propTypes = {}
+TasksList.propTypes = {
+  column: PropTypes.object.isRequired, 
+  tasks: PropTypes.array.isRequired
+}
 
 export default TasksList

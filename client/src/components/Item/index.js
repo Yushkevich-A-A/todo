@@ -36,6 +36,9 @@ function Item(props) {
   )
 }
 
-Item.propTypes = {}
+Item.propTypes = {
+  item: PropTypes.string,
+  handleClick: PropTypes.func.isRequired,
+}
 
 export default Item

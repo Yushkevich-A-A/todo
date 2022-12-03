@@ -58,6 +58,8 @@ function FileItemPreview(props) {
   )
 }
 
-FileItemPreview.propTypes = {}
+FileItemPreview.propTypes = {
+  item: PropTypes.object.isRequired
+}
 
 export default FileItemPreview

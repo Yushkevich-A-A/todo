@@ -72,6 +72,8 @@ function OtherTasksBlock(props) {
   )
 }
 
-OtherTasksBlock.propTypes = {}
+OtherTasksBlock.propTypes = {
+  task: PropTypes.object.isRequired
+}
 
 export default OtherTasksBlock

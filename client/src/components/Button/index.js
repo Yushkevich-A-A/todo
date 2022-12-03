@@ -49,6 +49,9 @@ function Button(props) {
   )
 }
 
-Button.propTypes = {}
+Button.propTypes = {
+  type: PropTypes.string,
+  handleClick: PropTypes.func.isRequired,
+}
 
 export default Button

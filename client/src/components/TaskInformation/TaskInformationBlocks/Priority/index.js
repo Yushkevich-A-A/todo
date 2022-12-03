@@ -74,7 +74,7 @@ const Arrow = styled.div`
 `;
 
 function Priority(props) {
-  const { task, project, sendData } = props;
+  const { task } = props;
   const dispatch = useDispatch();
   const [ openMenu, setOpenMenu ] = useState(false);
 
@@ -114,6 +114,8 @@ function Priority(props) {
   )
 }
 
-Priority.propTypes = {}
+Priority.propTypes = {
+  task: PropTypes.object.isRequired
+}
 
 export default Priority;

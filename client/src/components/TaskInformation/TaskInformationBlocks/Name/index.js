@@ -35,6 +35,8 @@ function Name(props) {
   )
 }
 
-Name.propTypes = {}
+Name.propTypes = {
+  task: PropTypes.object.isRequired
+}
 
 export default Name

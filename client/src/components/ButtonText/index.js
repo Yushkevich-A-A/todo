@@ -46,6 +46,10 @@ function ButtonText(props) {
   )
 }
 
-ButtonText.propTypes = {}
+ButtonText.propTypes = {
+  type: PropTypes.string,
+  handleClick: PropTypes.func.isRequired,
+  width: PropTypes.string,
+}
 
-export default ButtonText
+export default ButtonText;

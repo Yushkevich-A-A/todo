@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
 import Header from 'components/Header';
 import CreateButton from 'components/CreateButton';
@@ -29,7 +28,7 @@ const InputsBlock = styled.div`
   align-items: center;
 `;
 
-function ProjectPage(props) {
+function ProjectPage() {
   const { id } = useParams();
   const projects = useSelector( state => state.manageProject);
   const project = projects.find( item => item.id === id);
@@ -124,11 +123,11 @@ function ProjectPage(props) {
             }
           </BlockLists>
         </DragDropContext>
-        {
+        {/* {
           isOpen && <ModalWindow title="Создание задачи" closeModal={closeModalWindow}>
             <FormCreateTask project={project} closeModal={closeModalWindow}/>
           </ModalWindow>
-        }
+        } */}
       </Main>
     </div>
     }

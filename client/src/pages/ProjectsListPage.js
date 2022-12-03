@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import ListProject from 'components/ListProject';
 import ModalWindow from 'components/ModalWindow';
 import FormProject from 'components/Forms/FormProject';
@@ -53,7 +52,5 @@ function ProjectsListPage() {
     </div>
   )
 }
-
-ProjectsListPage.propTypes = {};
 
 export default ProjectsListPage;

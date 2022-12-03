@@ -38,6 +38,13 @@ function Input(props) {
   )
 }
 
-Input.propTypes = {}
+Input.propTypes = {
+  type: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  name: PropTypes.string,
+  handleClick: PropTypes.func.isRequired,
+  handleOnBlur: PropTypes.func,
+  placeholder: PropTypes.string,
+}
 
-export default Input
+export default Input;

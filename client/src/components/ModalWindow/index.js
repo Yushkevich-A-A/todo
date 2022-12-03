@@ -51,6 +51,9 @@ function ModalWindow(props) {
   )
 }
 
-ModalWindow.propTypes = {}
+ModalWindow.propTypes = {
+  closeModal: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+}
 
 export default ModalWindow

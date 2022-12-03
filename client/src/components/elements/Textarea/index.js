@@ -25,6 +25,13 @@ function Textarea(props) {
   )
 }
 
-Textarea.propTypes = {}
+Textarea.propTypes = {
+  type: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  name: PropTypes.string,
+  handleClick: PropTypes.func.isRequired,
+  handleOnBlur: PropTypes.func,
+  placeholder: PropTypes.string,
+}
 
 export default Textarea

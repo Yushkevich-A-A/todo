@@ -33,7 +33,9 @@ function FormProject(props) {
   )
 }
 
-FormProject.propTypes = {}
+FormProject.propTypes = {
+  closeModal: PropTypes.func.isRequired,
+}
 
 export default FormProject
 

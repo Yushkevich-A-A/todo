@@ -62,6 +62,9 @@ function ItemTask(props) {
   )
 }
 
-ItemTask.propTypes = {};
+ItemTask.propTypes = {
+  task: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
+};
 
 export default ItemTask;

@@ -18,7 +18,7 @@ function CreateButton(props) {
 }
 
 CreateButton.propTypes = {
-  handleClick: PropTypes.func,
+  handleClick: PropTypes.func.isRequired,
 }
 
 export default CreateButton

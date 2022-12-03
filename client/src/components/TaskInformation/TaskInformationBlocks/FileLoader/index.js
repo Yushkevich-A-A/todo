@@ -64,6 +64,8 @@ function FileLoader(props) {
   )
 }
 
-FileLoader.propTypes = {}
+FileLoader.propTypes = {
+  task: PropTypes.object.isRequired
+}
 
 export default FileLoader

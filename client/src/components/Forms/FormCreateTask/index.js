@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components';
-import InputText from 'components/InputText';
-import FormButton from 'components/FormButton';
+// import InputText from 'components/InputText';
+// import FormButton from 'components/FormButton';
 import { useDispatch } from 'react-redux';
 
 const Form = styled.form`
@@ -19,40 +19,43 @@ const ButtonBlock = styled.div`
 
 
 function FormCreateTask(props) {
-  const { project, closeModal } = props;
-  const dispatch = useDispatch();
-  const [ formData, setFormData ] = useState({
-    id_project: project.id,
-    number: '', 
-    name: '',
-    description: '',
-  })
+  // const { project, closeModal } = props;
+  // const dispatch = useDispatch();
+  // const [ formData, setFormData ] = useState({
+  //   id_project: project.id,
+  //   number: '', 
+  //   name: '',
+  //   description: '',
+  // })
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch({type: 'ADD_TASK_SAGA', payload: formData});
-    closeModal();
+  //   e.preventDefault();
+  //   dispatch({type: 'ADD_TASK_SAGA', payload: formData});
+  //   closeModal();
   } 
 
 
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setFormData( (state) => ({...state, [name]: value}));
-  }
+  // const handleChange = (e) => {
+  //   const name = e.target.name;
+  //   const value = e.target.value;
+  //   setFormData( (state) => ({...state, [name]: value}));
+  // }
 
   return (
     <Form onSubmit={handleSubmit}>
-      <InputText name='number' title='Номер' placeholder="введите номер задачи"  handleChange={handleChange}/>
+      {/* <InputText name='number' title='Номер' placeholder="введите номер задачи"  handleChange={handleChange}/>
       <InputText name='name' title='Заголовок' placeholder="Введите заголовок"  handleChange={handleChange}/>
       <InputText name='description' title='Описание' placeholder="Опишите задачу"  handleChange={handleChange}/>
       <ButtonBlock>
         <FormButton title="Создать" handleClick={handleSubmit}/>
-      </ButtonBlock>
+      </ButtonBlock> */}
     </Form>
   )
 }
 
-FormCreateTask.propTypes = {};
+FormCreateTask.propTypes = {
+  // project: PropTypes.object.isRequired,
+  // closeModal: PropTypes.func.isRequired,
+};
 
 export default FormCreateTask;
