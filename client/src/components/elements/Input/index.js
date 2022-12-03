@@ -23,9 +23,10 @@ const InputContainer = styled.input`
   padding: 5px;
   color: #172b4d;
   border: none;
+  background-color: #f3f3f3;
   &:focus {
     outline-color:#396ec9;
-    background-color: #f1f1f1;
+    background-color: white;
   }
 `;
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
 import Header from 'components/Header';
@@ -11,6 +11,8 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { useDispatch } from 'react-redux';
 import FormCreateTask from 'components/Forms/FormCreateTask';
 import cloneDeep from 'lodash/cloneDeep';
+import ButtonText from 'components/ButtonText';
+import Input from 'components/elements/Input';
 
 const Main = styled.main`
   padding-top: 10px;
@@ -22,12 +24,36 @@ const BlockLists = styled.div`
   align-items: flex-start;
 `;
 
+const InputsBlock = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 function ProjectPage(props) {
   const { id } = useParams();
   const projects = useSelector( state => state.manageProject);
   const project = projects.find( item => item.id === id);
   const dispatch = useDispatch();
   const [ isOpen, setOpenModal ] = useState(false);
+  const [ search, setSearch ] = useState('name');
+  const [ filter, setFilter ] = useState('');
+  const [ filterList, setFilterList ] = useState([]);
+
+  useEffect( () => {
+    if (!project) {
+      return;
+    }
+    if (search === 'name') {
+      setFilterList(project.task_list.filter( item => item.name.toLowerCase().includes(filter.toLowerCase())));
+      return;
+    }
+    setFilterList(project.task_list.filter( item => +item.number === parseInt(filter)));
+    
+  }, [project, filter])
+
+  const handleChange = (e) => {
+    setFilter(e.target.value)
+  } 
 
   const closeModalWindow = () => {
     setOpenModal(false)
@@ -35,6 +61,13 @@ function ProjectPage(props) {
 
   const openModal = (e) => {
     setOpenModal(true);
+  }
+
+  const searchTrigger = () => {
+    setFilter('');
+    search === 'name' ? 
+      setSearch( 'number' ) :
+      setSearch( 'name' );
   }
 
   const onDragEnd = (result) => {
@@ -71,16 +104,21 @@ function ProjectPage(props) {
     <>
     { project && <div>
       <Header title={project.name}>
-        <input type="text" />
+        <InputsBlock >
+          <ButtonText width='150px' handleClick={searchTrigger}>{search === 'name' ?  'по номеру' : 'по имени'}</ButtonText>
+          <Input 
+            type={ search === 'name'? 'text' : 'number' }
+            value={filter} handleChange={handleChange} 
+            placeholder={search === 'name' ?  'поиск по имени' : 'поиск по номеру'}/>
+        </InputsBlock>
         <CreateButton handleClick={openModal}>добавить задачу</CreateButton>
       </Header>
       <Main>
         <DragDropContext onDragEnd={onDragEnd}>
           <BlockLists>
             {
-              
               project.columns.map( column => <TasksList key={column.id} column={column} tasks={
-                  column.tasks.map( item => project.task_list.find( task => task.id === item) )
+                  filterList.filter( item => column.tasks.find( task => task === item.id))
                 }/>
               )
             }

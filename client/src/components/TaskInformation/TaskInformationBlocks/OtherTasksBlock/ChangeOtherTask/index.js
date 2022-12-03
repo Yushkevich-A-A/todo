@@ -57,6 +57,7 @@ function OtherTask(props) {
   }
 
   return (
+    
     <Row type='between'>
       <Row >
         <Round complete={other_task.complete} onClick={() => handleDispatch('complete', !other_task.complete)}/>

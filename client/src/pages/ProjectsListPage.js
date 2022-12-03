@@ -6,15 +6,16 @@ import FormProject from 'components/Forms/FormProject';
 import { useSelector } from 'react-redux';
 import Header from 'components/Header';
 import CreateButton from 'components/CreateButton';
+import Input from 'components/elements/Input';
 
 function ProjectsListPage() {
   const [ isOpen, setOpenModal ] = useState(false);
   const list = useSelector( state => state.manageProject);
   const [ filter, setFilter ] = useState('');
-  const [ filterList, setFilterList ] = useState([])
+  const [ filterList, setFilterList ] = useState([]);
 
   useEffect( () => {
-     list.filter( item => item.name.includes(filter))
+    setFilterList(list.filter( item => item.name.toLowerCase().includes(filter.toLowerCase())))
   }, [list, filter])
 
   const handleChange = (e) => {
@@ -32,7 +33,13 @@ function ProjectsListPage() {
   return (
     <div>
       <Header title='Проекты'>
-        <input type="text" value={filter} onChange={handleChange}/>
+        <div>
+          <Input 
+              type='text'
+              value={filter}
+              handleChange={handleChange} 
+              placeholder='поиск...'/>
+          </div>
         <CreateButton handleClick={openModal}>Создать проект</CreateButton>
       </Header>
       <main>

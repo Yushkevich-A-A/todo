@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  background-color: white;
+  background-color: #f3f3f3;
   padding: 10px;
   min-width: 200px;
   margin-top: 20px;
@@ -26,12 +26,6 @@ const ContainerHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-`;
-
-const CloseButton = styled.div`
-  width: 20px;
-  height: 20px;
-  background-color: red;
 `;
 
 const FormTitle = styled.h4`
