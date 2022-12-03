@@ -9,7 +9,6 @@ import styled from 'styled-components';
 import TasksList from 'components/TasksList';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { useDispatch } from 'react-redux';
-import { editProject } from 'store/projects/actions';
 import FormCreateTask from 'components/Forms/FormCreateTask';
 import cloneDeep from 'lodash/cloneDeep';
 

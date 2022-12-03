@@ -50,5 +50,5 @@ export async function downloadFile(apiURL, filename) {
     link.remove()
   }
   
-  console.log('ошибка скачивания файлов');
+  console.warm('ошибка скачивания файлов');
 }

@@ -1,5 +1,3 @@
-import { createNewProject } from "lib/createNewProject";
-import { createNewTask } from "lib/createNewTask";
 import { cloneDeep } from 'lodash';
 
 const initialState = []
