@@ -27,7 +27,6 @@ function FormCreateTask(props) {
   const { project, column_id, closeHandler } = props;
   const dispatch = useDispatch();
   const [ formTask, setFormTask ] = useState({
-    // number: Math.max(...project.task_list.map( item => item.number )) + 1,
     name: '',
   });
 
@@ -50,10 +49,6 @@ function FormCreateTask(props) {
   return (
     <FormBlock>
       <div>
-        {/* <InputBlock>
-          <Label >Номер</Label>
-          <Input type='number' value={formTask.number} name='number' handleChange={handleChange} placeholder='введите номер'/>
-        </InputBlock> */}
         <InputBlock>
           <Label htmlFor='name'>Название новой задачи</Label>
           <Input type='text' value={formTask.name} name='name' handleChange={handleChange} placeholder='введите название'/>
@@ -65,8 +60,9 @@ function FormCreateTask(props) {
 }
 
 FormCreateTask.propTypes = {
-  // project: PropTypes.object.isRequired,
-  // closeModal: PropTypes.func.isRequired,
+  project: PropTypes.object.isRequired, 
+  column_id: PropTypes.string.isRequired, 
+  closeHandler: PropTypes.func.isRequired,
 };
 
 export default FormCreateTask;

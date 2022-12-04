@@ -43,6 +43,7 @@ function Times(props) {
     return () => {
       clearInterval(interval);
     }
+    //eslint-disable-next-line
   }, [])
 
   useEffect(() => {
@@ -97,6 +98,8 @@ function Times(props) {
   )
 }
 
-Times.propTypes = {}
+Times.propTypes = {
+  task: PropTypes.object.isRequired,
+}
 
 export default Times

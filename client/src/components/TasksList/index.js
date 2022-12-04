@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import ItemTask from 'components/ItemTask';
 import { Droppable } from 'react-beautiful-dnd';
 import ButtonText from 'components/ButtonText';
-import { useDispatch } from 'react-redux';
 import FormCreateTask from 'components/Forms/FormCreateTask';
 
 const TaskListWrapper = styled.div`

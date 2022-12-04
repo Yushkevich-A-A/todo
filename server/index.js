@@ -1,5 +1,6 @@
 const fs = require('fs');
 const fileUpload = require('express-fileupload');
+const path = require('path');
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -14,11 +15,14 @@ app.use(fileUpload({createParentPath: true}));
 
 app.use(cors());
 app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
-
 app.use('/public', express.static(__dirname + '/public'));
+app.use('/static', express.static(__dirname + '/public/build/static'))
 
 // Получение начальных данных
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname + '/public/build', 'index.html'));
+});
+
 
 app.get('/api/projects', (req, res) => {
   res.send(db);
@@ -84,7 +88,7 @@ app.delete('/api/task', (req, res) => {
   const deleteTaskIndex = edittingProject.task_list.findIndex( item => item.id === req.body.id);
   edittingProject.task_list.splice( deleteTaskIndex, 1);
   const edittingcolumn = edittingProject.columns.find( column => column.id === req.body.id_column ).tasks;
-  const indexInColumn = edittingcolumn.find( item => item === req.body.id);
+  const indexInColumn = edittingcolumn.findIndex( item => item === req.body.id);
   edittingcolumn.splice(indexInColumn, 1);
 
   fs.rmdirSync(`${__dirname}/public/folders/${req.body.id_project}/${req.body.id}`, {recursive: true, force: true})
@@ -209,7 +213,6 @@ app.put('/api/task/deadline', (req, res) => {
   edittingTask.finish_date = req.body.finish_date;
   res.send(edittingProject);
 });
-
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

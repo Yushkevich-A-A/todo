@@ -29,6 +29,8 @@ const Label = styled.div`
         return css`
           background-color: red;
         `;
+      default: 
+        return;
     }
 }}
 color: white;

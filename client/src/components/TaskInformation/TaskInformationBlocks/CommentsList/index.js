@@ -22,6 +22,8 @@ function CommentsList(props) {
   )
 }
 
-CommentsList.propTypes = {}
+CommentsList.propTypes = {
+  comments: PropTypes.array.isRequired,
+}
 
 export default CommentsList

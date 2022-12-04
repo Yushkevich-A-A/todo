@@ -38,20 +38,33 @@ function ProjectPage() {
     if (!project) {
       return;
     }
-    if (search === 'name') {
-      setFilterList(project.task_list.filter( item => item.name.toLowerCase().includes(filter.toLowerCase())));
+    filterListFunc(filter);
+    //eslint-disable-next-line
+  }, [ project ])
+
+
+  const handleChangeFilter = (e) => {
+    setFilter(e.target.value);
+    filterListFunc(e.target.value);
+  } 
+
+  const filterListFunc = (value) => {
+    const list = project.task_list;
+    if (value === '') {
+      setFilterList( list); 
       return;
     }
-    setFilterList(project.task_list.filter( item => +item.number === parseInt(filter)));
-    
-  }, [ projects, filter])
 
-  const handleChange = (e) => {
-    setFilter(e.target.value)
-  } 
+    if (search === 'name') {
+      setFilterList( list.filter( item => item.name.toLowerCase().includes(value.toLowerCase())));
+      return;
+    }
+    setFilterList( list.filter( item => +item.number === parseInt(value)));
+  }
 
   const searchTrigger = () => {
     setFilter('');
+    filterListFunc('')
     search === 'name' ? 
       setSearch( 'number' ):
       setSearch( 'name' );
@@ -96,7 +109,7 @@ function ProjectPage() {
           <Input 
             type={ search === 'name'? 'text' : 'number' }
             value={filter} 
-            handleChange={handleChange} 
+            handleChange={handleChangeFilter} 
             placeholder={search === 'name' ?  'поиск по имени' : 'поиск по номеру'}/>
         </InputsBlock>
       </Header>
@@ -117,7 +130,5 @@ function ProjectPage() {
     </>
   )
 }
-
-ProjectPage.propTypes = {}
 
 export default ProjectPage

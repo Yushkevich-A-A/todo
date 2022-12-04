@@ -24,11 +24,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && npm run postbuild",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint ."
-    
+    "lint": "eslint ."  
   },
   "eslintConfig": {
     "extends": [
@@ -47,5 +46,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "homepage": "https://localhost:3001"
 }

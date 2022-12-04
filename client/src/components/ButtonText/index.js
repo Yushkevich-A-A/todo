@@ -36,7 +36,7 @@ const ButtonType = styled.div`
 `;
 
 function ButtonText(props) {
-  const { type, handleClick, width } = props;
+  const { type, handleClick } = props;
 
   return (
     <ButtonType type={type} onClick={handleClick}>

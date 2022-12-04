@@ -9,13 +9,20 @@
     "express-fileupload": "^1.4.0",
     "multer": "^1.4.5-lts.1",
     "nanoid": "^4.0.0",
-    "nodemon": "^2.0.20",
     "uuid": "^9.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20"
+  },
   "scripts": {
+    "server": "nodemon --quiet index.js",
+    "client": "cd client && npm run build && npm run postbuild",
+    "build": "concurrently \"npm run server\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server/index.js"
+    "start": "nodemon --quiet server/index.js",
+    "postbuild": "cp -r client/build server/public/ && rm -r client/build"
+    
   },
   "author": "",
   "license": "ISC"

@@ -45,6 +45,9 @@ function FormCreateComment(props) {
   )
 }
 
-FormCreateComment.propTypes = {}
+FormCreateComment.propTypes = {
+  closeForm: PropTypes.func, 
+  main_comment: PropTypes.object.isRequired, 
+}
 
 export default FormCreateComment

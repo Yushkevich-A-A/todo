@@ -31,46 +31,6 @@ function ItemInformation(props) {
     dispatch({ type: "DELETE_TASK_SAGA", payload: { id_project: task.id_project, id: task.id, id_column: id_column } });
   } 
 
-  const initComment = [{
-    name: 'Anton Yushkevich',
-    created: Date.now(),
-    message: "Hello World",
-    comments: [
-      {
-        name: 'a Yushkevich',
-        created: Date.now(),
-        message: "Hello World",
-        comments: [
-          {
-            name: 'Anaskevich',
-            created: Date.now(),
-            message: "Hello World",
-            comments: [
-              {
-                name: 'nton evich',
-                created: Date.now(),
-                message: "Hello World",
-                comments: []
-              },
-            ]
-          },
-          {
-            name: 'Antossn nngich',
-            created: Date.now(),
-            message: "Hello World",
-            comments: []
-          },
-        ]
-      },
-      {
-        name: 'Pghjnton mushsich',
-        created: Date.now(),
-        message: "Hello World",
-        comments: []
-      }
-    ]
-  }]
-
   const firstCommentlist = {
     id: null,
     id_project: task.id_project,

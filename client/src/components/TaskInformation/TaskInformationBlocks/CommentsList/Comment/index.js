@@ -77,6 +77,8 @@ function Comment(props) {
   )
 }
 
-Comment.propTypes = {}
+Comment.propTypes = {
+  comment: PropTypes.object.isRequired,
+}
 
 export default Comment
