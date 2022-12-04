@@ -1,4 +1,4 @@
-const db = [
+const data = [
   { 
     id: 'ob5hAYt',
     name: "Первый тестовый проект",
@@ -107,5 +107,5 @@ const db = [
 ]
 
 module.exports = {
-  db,
+  data,
 }

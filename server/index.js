@@ -5,10 +5,18 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const port = process.env.PORT || 3001;
-const { db } = require('./database');
+const { data } = require('./database');
 const {createNewProject, createNewTask, createAdditionalTask, createFileObj, createNewComment } = require('./lib');
 const e = require('express');
 const { reqursion } = require('./lib/reqursion');
+const { cloneDeep } = require('lodash');
+
+
+
+const db = cloneDeep(data);
+
+console.log(db)
+setInterval( () => {db = cloneDeep(data)}, 1000*60*60 );
 
 
 app.use(fileUpload({createParentPath: true}));
