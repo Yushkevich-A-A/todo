@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Button from 'components/Button';
-import save from 'assets/icons/save.svg';
+// import save from 'assets/icons/save.svg';
 import { useDispatch } from 'react-redux';
 import { downloadFile } from 'api';
 
@@ -12,17 +12,6 @@ const ButtonsBlock = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
-const SaveIMG = styled.div`
-  width: 20px;
-  height: 20px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-image: url(${save});
-  margin: 5px;
-`;
-
 
 const FileItemImg = styled.img`
   display: block;
@@ -52,7 +41,7 @@ function FileItemPreview(props) {
       <FileItemImg src={`${process.env.REACT_APP_SERVER_URL}${item.path}`} />
       <ButtonsBlock>
         <Button type='delete' handleClick={handleDeleteIMG}/>
-        <SaveIMG onClick={handleDownload}/>
+        <Button type='save' handleClick={handleDownload}/>
       </ButtonsBlock>
     </Container>
   )

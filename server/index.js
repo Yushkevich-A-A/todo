@@ -16,12 +16,8 @@ app.use(fileUpload({createParentPath: true}));
 app.use(cors());
 app.use(express.json());
 app.use('/public', express.static(__dirname + '/public'));
-app.use('/static', express.static(__dirname + '/public/build/static'))
-
-// Получение начальных данных
-app.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname + '/public/build', 'index.html'));
-});
+app.use('/static', express.static(__dirname + '/public/build/static'));
+// app.use( /\.(js|css|map|ico|json)$/, express.static( path.resolve( __dirname, '/public/build' ) ) );
 
 
 app.get('/api/projects', (req, res) => {
@@ -212,6 +208,12 @@ app.put('/api/task/deadline', (req, res) => {
   const edittingTask = edittingProject.task_list.find( item => item.id === req.body.id_task);
   edittingTask.finish_date = req.body.finish_date;
   res.send(edittingProject);
+});
+
+
+// Получение начальных данных
+app.get('/*', (req, res) => {
+  res.sendFile(path.resolve(__dirname + '/public/build', 'index.html'));
 });
 
 app.listen(port, () => {

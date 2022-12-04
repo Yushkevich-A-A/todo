@@ -4,29 +4,41 @@ import styled, { css } from 'styled-components';
 import deleteIcon from 'assets/icons/delete.svg';
 import edit from 'assets/icons/edit.svg';
 import close from 'assets/icons/close.svg';
+import save from 'assets/icons/save.svg';
 
 const ButtonType = styled.div`
-  width: 20px;
-  height: 20px;
+  min-width: 30px;
+  min-height: 30px;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 20px;
   background-position: center;
   margin: 5px;
   padding: 5px;
   border: 2px solid transparent;
   border-radius: 5px;
+  transition: border 0.2s;
   ${
     (props) => {
       switch(props.type) {
         case 'close':
           return css`
             background-image: url(${close});
+            &:hover {
+              border-color: red;
+            }
           `
         case 'delete':
           return css`
             background-image: url(${deleteIcon});
             &:hover {
               border-color: red;
+            }
+          `
+        case 'save':
+          return css`
+            background-image: url(${save});
+            &:hover {
+              border-color: green;
             }
           `
         case 'edit':

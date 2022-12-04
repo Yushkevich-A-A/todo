@@ -1,15 +1,15 @@
 const db = [
   { 
     id: 'ob5hAYt',
-    name: "Проект 1",
-    desription: "тестовый проект создания TODO лист",
+    name: "Первый тестовый поект",
+    desription: "тестовый проект создания TODO листа для демонстрации навыйков разработки",
     task_list: [
       {
         id: "7nKdnQ",
         id_project: 'ob5hAYt',
         number: 1, 
-        name: "ПРиведи друга",
-        description: "В этой задаче нет победителей",
+        name: "Создать каркас приложения",
+        description: "Создаем приложение вызовом команды npx create-react-app .",
         create_date: Date.now() - 1000000,
         finish_date: Date.now() + 1000000,
         priority: 'up-middle',
@@ -21,8 +21,8 @@ const db = [
         id: "nQI5bFqZEqHPph2m",
         id_project: 'ob5hAYt',
         number: 2, 
-        name: "Купить хлеба",
-        description: "ПРосто сходи в магазин",
+        name: "Создание компонентов",
+        description: "Создание компонентов и хранилища приложения",
         create_date: Date.now() - 1230000,
         finish_date: Date.now() + 100000,
         priority: 'high',
@@ -34,8 +34,8 @@ const db = [
         id: "qZEq2HPph2m",
         id_project: 'ob5hAYt',
         number: 3, 
-        name: "Создай todo list",
-        description: "листик",
+        name: "Оживление проектов",
+        description: "Включение логики приложения, установление взаимодействия компонентов, подключение к хранилищу",
         create_date: Date.now() - 100000,
         finish_date: Date.now() + 50000,
         priority: 'middle',
@@ -48,8 +48,8 @@ const db = [
         id: "48bFqZEq",
         id_project: 'ob5hAYt',
         number: 4, 
-        name: "Еще задачка",
-        description: "задачка",
+        name: "Достилизация",
+        description: "корректировка стилей и добавление анимаций",
         create_date: Date.now() - 1005000,
         finish_date: Date.now() + 500400,
         priority: 'low',
@@ -75,8 +75,8 @@ const db = [
   },
   { 
     id: 'ob5hAYtP5P0olajRvbmfN',
-    name: "Новый  проект",
-    desription: "тестовый проект",
+    name: "Бэк на сервене",
+    desription: "разработка сервеной части",
     task_list: [],
     columns: [
       {

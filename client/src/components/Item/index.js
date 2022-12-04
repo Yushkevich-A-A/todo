@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import Button from 'components/Button'
 import { useDispatch } from 'react-redux'
 
@@ -12,7 +12,11 @@ const ItemElement = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  opacity: 0;
+  transition: opacity 0.5s;
+  ${ props =>  props.transition && css`opacity: 1;`
+  };
+  
   &&:nth-child( n + 2 ) {
     margin-top: 10px;
   }
@@ -25,14 +29,22 @@ const ItemElement = styled.div`
 function Item(props) {
   const { item, handleClick } = props;
   const dispatch = useDispatch();
+  const [transition, setTransition] = useState(false);
+
+  useEffect( () => {
+    setTimeout(() => setTransition(true), 10);
+  }, [])
 
   const handleDeleteClick = (e) => {
     e.stopPropagation();
-    dispatch({ type: "DELETE_PROJECT_SAGA", payload: { id: item.id } });
+    setTransition(false);
+    setTimeout(() => {
+      dispatch({ type: "DELETE_PROJECT_SAGA", payload: { id: item.id } });
+    },100)
   } 
 
   return (
-    <ItemElement onClick={() => handleClick(item.id)}>
+    <ItemElement transition={transition} onClick={() => handleClick(item.id)}>
       {item.name}
       <Button type='delete' handleClick={handleDeleteClick}/>
     </ItemElement>
@@ -40,7 +52,7 @@ function Item(props) {
 }
 
 Item.propTypes = {
-  item: PropTypes.string,
+  item: PropTypes.object,
   handleClick: PropTypes.func.isRequired,
 }
 
