@@ -188,7 +188,6 @@ app.delete('/api/task/files', (req, res) => {
 // добавление комментария
 
 app.post('/api/task/comment', (req, res) => {
-  // const newAdditionalTask = createAdditionalTask(req.body);
   const edittingProject = db.find( item => item.id === req.body.id_project );
   const edittingTask = edittingProject.task_list.find( item => item.id === req.body.id_task);
   const newComment = createNewComment(req.body);
@@ -199,6 +198,15 @@ app.post('/api/task/comment', (req, res) => {
     mainComment.comments.push(newComment);
   }
   
+  res.send(edittingProject);
+});
+
+// изменение даты окончания задачи
+
+app.put('/api/task/deadline', (req, res) => {
+  const edittingProject = db.find( item => item.id === req.body.id_project );
+  const edittingTask = edittingProject.task_list.find( item => item.id === req.body.id_task);
+  edittingTask.finish_date = req.body.finish_date;
   res.send(edittingProject);
 });
 

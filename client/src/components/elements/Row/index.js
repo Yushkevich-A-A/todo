@@ -13,6 +13,10 @@ const Container = styled.div`
         return css`
           justify-content: space-between;
         `
+      case 'around':
+        return css`
+          justify-content: space-around;
+        `
       case 'end':
         return css`
           justify-content: flex-end;
