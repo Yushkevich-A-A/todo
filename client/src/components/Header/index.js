@@ -9,9 +9,15 @@ const HeaderComponent = styled.header`
   background-color: #2655ff;
   color: white;
   padding: 10px;
+
+  @media (max-width: 550px) {
+    flex-direction: column;
+  }
 `;
 
-const Title = styled.h1``
+const Title = styled.h1`
+  margin: 10px;
+`
 
 
 function Header(props) {

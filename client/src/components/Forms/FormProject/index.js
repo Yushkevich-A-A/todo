@@ -1,6 +1,18 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux';
+import Input from 'components/elements/Input';
+import styled from 'styled-components';
+import ButtonText from 'components/ButtonText';
+
+const BlockInput = styled.div`
+  margin-top: 10px;
+  margin-bottom: 10px;
+  & input {
+    background-color: white;
+  }
+`;
+
 
 
 function FormProject(props) {
@@ -17,18 +29,22 @@ function FormProject(props) {
     setForm(() => ({...form, [field]: value}));
   }
 
-  const handleSubmit = (e) => {
+  const handleClick = (e) => {
     e.preventDefault();
     dispatch({type: 'ADD_PROJECT_SAGA', data: form});
     closeModal();
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" name="name" onChange={handleChange}/>
-      <input type="text" name="description" onChange={handleChange}/>
-      <button>save</button>
-    </form>
+    <div>
+      <BlockInput >
+        <Input type="text" value={form.name} name="name" onChange={handleChange} placeholder='назовите проект...'/>
+      </BlockInput>
+      <BlockInput >
+        <Input type="text" value={form.description} name="description" onChange={handleChange} placeholder='опишите проект...'/>
+      </BlockInput>
+      <ButtonText type='add' onClick={handleClick}>Добавить</ButtonText>
+    </div>
   )
 }
 

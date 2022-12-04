@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import Button from 'components/Button';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const Wrapper = styled.div`
   position: absolute;
@@ -13,13 +15,18 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  opacity: 0;
+  transition: opacity 0.2s;
+  ${ props =>  props.transition && css`opacity: 1;`}
+
 `;
 
 const Container = styled.div`
   background-color: #f3f3f3;
   padding: 10px;
-  min-width: 200px;
-  margin-top: 20px;
+  margin: 20px;
+  max-width: 400px;
+  width: 100%;
 `;
 
 const ContainerHeader = styled.div`
@@ -35,9 +42,14 @@ const FormTitle = styled.h4`
 
 function ModalWindow(props) {
   const { closeModal, title} = props;
+  const [ transition, setTransition ] = useState(false);
+
+  useEffect( () => {
+    setTimeout(() => setTransition(true), 1)
+  }, [])
 
   return (
-    <Wrapper>
+    <Wrapper transition={transition}>
       <Container>
         <ContainerHeader>
           <FormTitle>{title}</FormTitle>

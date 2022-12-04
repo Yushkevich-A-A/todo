@@ -13,9 +13,8 @@ const ItemElement = styled.div`
   justify-content: space-between;
   align-items: center;
   opacity: 0;
-  transition: opacity 0.5s;
-  ${ props =>  props.transition && css`opacity: 1;`
-  };
+  transition: opacity 0.2s;
+  ${ props =>  props.transition && css`opacity: 1;`}
   
   &&:nth-child( n + 2 ) {
     margin-top: 10px;

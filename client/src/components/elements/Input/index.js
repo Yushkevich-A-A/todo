@@ -24,6 +24,9 @@ const InputContainer = styled.input`
   color: #172b4d;
   border: none;
   background-color: #f3f3f3;
+  outline-color: transparent;
+  transition: outline-color 0.5s;
+
   &:focus {
     outline-color:#396ec9;
     background-color: white;

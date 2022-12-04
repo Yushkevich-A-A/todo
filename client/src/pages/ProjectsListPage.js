@@ -6,12 +6,25 @@ import { useSelector } from 'react-redux';
 import Header from 'components/Header';
 import CreateButton from 'components/CreateButton';
 import Input from 'components/elements/Input';
+import styled, { css } from 'styled-components';
+
+const Container = styled.div`
+  opacity: 0;
+  transition: opacity 0.5s;
+  ${ props =>  props.transition && css`opacity: 1;`}
+`
 
 function ProjectsListPage() {
   const [ isOpen, setOpenModal ] = useState(false);
   const list = useSelector( state => state.manageProject);
   const [ filter, setFilter ] = useState('');
   const [ filterList, setFilterList ] = useState([]);
+  const [ transition, setTransition ] = useState(false);
+
+  useEffect( () => {
+    setTimeout(() => setTransition(true), 1)
+  }, [])
+
 
   useEffect( () => {
     setFilterList(list.filter( item => item.name.toLowerCase().includes(filter.toLowerCase())))
@@ -30,7 +43,7 @@ function ProjectsListPage() {
   }
 
   return (
-    <div>
+    <Container transition={transition} >
       <Header title='Проекты'>
         <div>
           <Input 
@@ -38,7 +51,7 @@ function ProjectsListPage() {
               value={filter}
               handleChange={handleChange} 
               placeholder='поиск...'/>
-          </div>
+        </div>
         <CreateButton handleClick={openModal}>Создать проект</CreateButton>
       </Header>
       <main>
@@ -49,7 +62,7 @@ function ProjectsListPage() {
           </ModalWindow>
         }
       </main>
-    </div>
+    </Container>
   )
 }
 

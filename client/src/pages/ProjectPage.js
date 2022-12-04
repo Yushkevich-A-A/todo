@@ -2,13 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Header from 'components/Header';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import TasksList from 'components/TasksList';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { useDispatch } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 import ButtonText from 'components/ButtonText';
 import Input from 'components/elements/Input';
+
+const Container = styled.div`
+  opacity: 0;
+  transition: opacity 0.5s;
+  ${ props =>  props.transition && css`opacity: 1;`}
+`
 
 const Main = styled.main`
   padding-top: 10px;
@@ -33,6 +39,11 @@ function ProjectPage() {
   const [ search, setSearch ] = useState('name');
   const [ filter, setFilter ] = useState('');
   const [ filterList, setFilterList ] = useState([]);
+  const [ transition, setTransition ] = useState(false);
+
+  useEffect( () => {
+    setTimeout(() => setTransition(true), 1)
+  }, [])
 
   useEffect( () => {
     if (!project) {
@@ -41,7 +52,6 @@ function ProjectPage() {
     filterListFunc(filter);
     //eslint-disable-next-line
   }, [ project ])
-
 
   const handleChangeFilter = (e) => {
     setFilter(e.target.value);
@@ -102,7 +112,7 @@ function ProjectPage() {
 
   return (
     <>
-    { project && <div>
+    { project && <Container transition={transition}>
       <Header title={project.name}>
         <InputsBlock >
           <ButtonText handleClick={searchTrigger}>{search === 'name' ?  'по номеру' : 'по имени'}</ButtonText>
@@ -125,7 +135,7 @@ function ProjectPage() {
           </BlockLists>
         </DragDropContext>
       </Main>
-    </div>
+    </Container>
     }
     </>
   )
