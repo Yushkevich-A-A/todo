@@ -35,6 +35,7 @@ function createNewProject (data) {
 function createNewTask(data) {
   const odj = {
     ...data,
+    description: '',
     id: uuidv4(),
     create_date: Date.now(),
     finish_date: null,
@@ -53,9 +54,20 @@ function createFileObj(data) {
   return odj;
 } 
 
+function createNewComment(data) {
+  const odj = {
+    ...data,
+    id: uuidv4(),
+    created: Date.now(),
+    comments:[]
+  }
+  return odj;
+} 
+
 module.exports = {
   createAdditionalTask,
   createNewProject,
   createNewTask,
   createFileObj,
+  createNewComment
 }

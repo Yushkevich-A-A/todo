@@ -5,7 +5,9 @@ const app = express();
 const cors = require('cors');
 const port = process.env.PORT || 3001;
 const { db } = require('./database');
-const {createNewProject, createNewTask, createAdditionalTask, createFileObj } = require('./lib');
+const {createNewProject, createNewTask, createAdditionalTask, createFileObj, createNewComment } = require('./lib');
+const e = require('express');
+const { reqursion } = require('./lib/reqursion');
 
 
 app.use(fileUpload({createParentPath: true}));
@@ -57,17 +59,23 @@ app.delete('/api/projects', (req, res) => {
 // ручки создания и изменения выбранного проекта
 
 app.post('/api/task', (req, res) => {
-  const newTask = createNewTask(req.body);
+  const edittingProject = db.find( item => item.id === req.body.id_project );
+  const numberForNewTask = Math.max( ...edittingProject.task_list.map( item => item.number )) + 1;
 
+  const newTask = createNewTask({
+    ...req.body.data, 
+    number: numberForNewTask,
+    id_project: req.body.id_project,
+  });
+
+  edittingProject.task_list.push(newTask);
+  edittingProject.columns.find( item => item.id ===  req.body.column_id).tasks.push(newTask.id)
   fs.mkdir(`${__dirname}/public/folders/${newTask.id_project}/${newTask.id}`, err => {
     if (err) {
       throw err
     }
     console.log('Directory is created.')
   });
-  const edittingProject = db.find( item => item.id === req.body.id_project );
-  edittingProject.task_list.push(newTask);
-  edittingProject.columns[0].tasks.push(newTask.id);
   res.send(edittingProject);
 });
 
@@ -75,9 +83,12 @@ app.delete('/api/task', (req, res) => {
   const edittingProject = db.find( item => item.id === req.body.id_project );
   const deleteTaskIndex = edittingProject.task_list.findIndex( item => item.id === req.body.id);
   edittingProject.task_list.splice( deleteTaskIndex, 1);
-  if (fs.existsSync(`${__dirname}/public/folders/${newTask.id_project}/${newTask.id}`)) {
-    fs.rmdirSync(`${__dirname}/public/folders/${newTask.id_project}/${newTask.id}`, {recursive: true, force: true})
-  }
+  const edittingcolumn = edittingProject.columns.find( column => column.id === req.body.id_column ).tasks;
+  const indexInColumn = edittingcolumn.find( item => item === req.body.id);
+  edittingcolumn.splice(indexInColumn, 1);
+
+  fs.rmdirSync(`${__dirname}/public/folders/${req.body.id_project}/${req.body.id}`, {recursive: true, force: true})
+  console.log(edittingcolumn);
   res.send(edittingProject);
 });
 
@@ -174,8 +185,22 @@ app.delete('/api/task/files', (req, res) => {
   });  
 });
 
+// добавление комментария
 
-
+app.post('/api/task/comment', (req, res) => {
+  // const newAdditionalTask = createAdditionalTask(req.body);
+  const edittingProject = db.find( item => item.id === req.body.id_project );
+  const edittingTask = edittingProject.task_list.find( item => item.id === req.body.id_task);
+  const newComment = createNewComment(req.body);
+  if (!req.body.id_main_comment) {
+    edittingTask.comments.push(newComment);
+  } else {
+    const mainComment = reqursion(edittingTask.comments, newComment.id_main_comment);
+    mainComment.comments.push(newComment);
+  }
+  
+  res.send(edittingProject);
+});
 
 
 app.listen(port, () => {

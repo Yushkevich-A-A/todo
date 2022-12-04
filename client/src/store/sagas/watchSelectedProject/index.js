@@ -7,6 +7,11 @@ function* workerAddTask(action) {
   yield put({ type:'EDIT_PROJECT', payload: { editedProject }});
 }
 
+function* workerDeleteTask(action) {
+  const editedProject = yield call(deleteData, 'task' , action.payload );
+  yield put({ type:'EDIT_PROJECT', payload: { editedProject }});
+}
+
 // проработать ручку изменения проекта
 
 function* workerChangeColumns(action) {
@@ -49,7 +54,6 @@ function* workerDeleteAdditionalTask(action) {
 // отправка файлов на сервер
 
 function* workerAddFilesTask(action) {
-  console.log(action.payload );
   const editedProject = yield call(postDataForm, 'task/files' , action.payload );
   yield put({ type:'EDIT_PROJECT', payload: { editedProject }});
 }
@@ -60,9 +64,19 @@ function* workerDeleteFilesTask(action) {
   yield put({ type:'EDIT_PROJECT', payload: { editedProject }});
 }
 
+// добавление комментария
+
+function* workerAddComment(action) {
+  debugger;
+  const editedProject = yield call(postData, 'task/comment' , action.payload );
+  yield put({ type:'EDIT_PROJECT', payload: { editedProject }});
+}
+
+
 export default function* whatchSelectedProject () {
   yield all([
       takeLatest('CREATE_NEW_TASK_SAGA', workerAddTask),
+      takeLatest('DELETE_TASK_SAGA', workerDeleteTask),
       takeLatest('EDIT_COLUMNS_SAGA', workerChangeColumns),
       takeLatest("CHANGE_NAME_SAGA", workerChangeName),
       takeLatest("CHANGE_DESCRIPTION_SAGA", workerChangeDescription),
@@ -72,5 +86,6 @@ export default function* whatchSelectedProject () {
       takeLeading("DELETE_ADDITIONAL_TASK_SAGA", workerDeleteAdditionalTask),
       takeLeading("ADD_FILES_TASK_SAGA", workerAddFilesTask),
       takeLeading("DELETE_FILE_TASK_SAGA", workerDeleteFilesTask),
+      takeLeading("ADD_COMMENT_SAGA", workerAddComment),
     ])
 }

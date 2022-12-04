@@ -9,6 +9,9 @@ const ItemElement = styled.div`
   border-radius: 5px;
   padding: 10px;
   transition: background-color .2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   &&:nth-child( n + 2 ) {
     margin-top: 10px;

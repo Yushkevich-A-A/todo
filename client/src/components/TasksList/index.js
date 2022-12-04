@@ -32,7 +32,6 @@ const BlockAddTask = styled.div`
 function TasksList(props) {
   const { column, tasks, project } = props;
   const [ openAdd, setOpenAdd ] = useState(false);
-
   const closeForm = () => {
     setOpenAdd(false)
   }
@@ -49,7 +48,7 @@ function TasksList(props) {
           >
             { 
               tasks.map( (task, index) => (
-                <ItemTask key={task.id} task={task} index={index}/>)
+                <ItemTask key={task.id} task={task} id_column={column.id} index={index}/>)
               )
             }
             {provided.placeholder}

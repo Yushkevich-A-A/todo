@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Header from 'components/Header';
-import CreateButton from 'components/CreateButton';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import TasksList from 'components/TasksList';
@@ -45,7 +44,7 @@ function ProjectPage() {
     }
     setFilterList(project.task_list.filter( item => +item.number === parseInt(filter)));
     
-  }, [project, filter])
+  }, [ projects, filter])
 
   const handleChange = (e) => {
     setFilter(e.target.value)
@@ -54,7 +53,7 @@ function ProjectPage() {
   const searchTrigger = () => {
     setFilter('');
     search === 'name' ? 
-      setSearch( 'number' ) :
+      setSearch( 'number' ):
       setSearch( 'name' );
   }
 
@@ -93,7 +92,7 @@ function ProjectPage() {
     { project && <div>
       <Header title={project.name}>
         <InputsBlock >
-          <ButtonText width='150px' handleClick={searchTrigger}>{search === 'name' ?  'по номеру' : 'по имени'}</ButtonText>
+          <ButtonText handleClick={searchTrigger}>{search === 'name' ?  'по номеру' : 'по имени'}</ButtonText>
           <Input 
             type={ search === 'name'? 'text' : 'number' }
             value={filter} 

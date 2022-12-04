@@ -17,6 +17,7 @@ const ButtonType = styled.div`
       default: 
         return css `
         background-color: #cdcdcd;
+        color: #424141;
         &:hover {
           background-color: #b4b4b4;
         }

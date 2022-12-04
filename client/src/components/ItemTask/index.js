@@ -11,6 +11,9 @@ const ItemElement = styled.div`
   padding: 10px;
   background-color: #fff;
   transition: background-color .2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   &&:hover {
     background-color: #f2f2f2;
@@ -26,7 +29,7 @@ const Container = styled.div`
 `;
 
 function ItemTask(props) {
-  const { task, index } = props;
+  const { id_column, task, index } = props;
   const [ isOpen, setOpenModal ] = useState(false);
 
   const closeModalWindow = () => {
@@ -36,6 +39,7 @@ function ItemTask(props) {
   const openModal = (e) => {
     setOpenModal(true);
   }
+
 
   return (
     <Container>
@@ -55,7 +59,7 @@ function ItemTask(props) {
       </Draggable>
       {
         isOpen && <ModalWindow closeModal={closeModalWindow} title={`№ ${task.number}`} >
-          <ItemInformation task={task}/>
+          <ItemInformation task={task} id_column={id_column} closeModal={closeModalWindow}/>
         </ModalWindow>
       }
     </Container>
