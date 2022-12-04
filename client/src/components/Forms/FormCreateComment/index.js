@@ -1,13 +1,39 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import BattonText from 'components/ButtonText';
+import ButtonText from 'components/ButtonText';
 import Input from 'components/elements/Input';
 import Textarea from 'components/elements/Textarea';
 import { useDispatch } from 'react-redux';
 
-const AddComment = styled.div``;
-const FormComment = styled.div``;
+const AddComment = styled.div`
+  position: absolute;
+  top: -50px;
+  left: 0;
+  z-index: 999;
+  border: 1px solid  #d7d7d7;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: white;
+`;
+const FormComment = styled.div`
+& input {
+  margin-bottom: 10px;
+  background-color: white;
+  box-shadow: 0 0 0 1pt #d7d7d7;
+}
+
+& textarea {
+  box-shadow: 0 0 0 1pt #d7d7d7;
+}
+`;
+const ButtonsBlock = styled.div`
+  display: flex;
+  & div {
+    min-width: 100px;
+  }
+`;
+
 
 function FormCreateComment(props) {
   const { closeForm, main_comment } = props;
@@ -37,10 +63,13 @@ function FormCreateComment(props) {
   return (
     <AddComment>
       <FormComment>
-      <Input type='text' value={form.name} name='name' handleChange={handleChange} placeholder='Укажите имя' />
-      <Textarea  value={form.message} name='message' handleChange={handleChange} placeholder='Введите сообщение'/>
+        <Input type='text' value={form.name} name='name' handleChange={handleChange} placeholder='Укажите имя' />
+        <Textarea  value={form.message} name='message' handleChange={handleChange} placeholder='Введите сообщение'/>
       </FormComment>
-      <BattonText type='add' handleClick={handleSubmit}>Сохранить</BattonText>
+      <ButtonsBlock>
+        <ButtonText type='add' handleClick={handleSubmit}>Сохранить</ButtonText>
+        <ButtonText handleClick={() => closeForm()}>Отменить</ButtonText>
+      </ButtonsBlock>
     </AddComment>
   )
 }

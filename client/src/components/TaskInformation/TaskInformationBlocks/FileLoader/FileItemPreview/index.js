@@ -6,7 +6,11 @@ import Button from 'components/Button';
 import { useDispatch } from 'react-redux';
 import { downloadFile } from 'api';
 
-const Container = styled.div``;
+const Container = styled.div`
+  border: 1px solid grey;
+  border-radius: 5px;
+`;
+
 const ButtonsBlock = styled.div`
   display:flex;
   justify-content: center;
@@ -38,7 +42,10 @@ function FileItemPreview(props) {
 
   return (
     <Container>
-      <FileItemImg src={`${process.env.REACT_APP_SERVER_URL}${item.path}`} />
+      <a href={`${process.env.REACT_APP_SERVER_URL}${item.path}`} rel="noreferrer" target='_blank'>
+        <FileItemImg src={`${process.env.REACT_APP_SERVER_URL}${item.path}`} />
+      </a>
+      
       <ButtonsBlock>
         <Button type='delete' handleClick={handleDeleteIMG}/>
         <Button type='save' handleClick={handleDownload}/>

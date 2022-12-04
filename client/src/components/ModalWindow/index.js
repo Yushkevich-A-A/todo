@@ -11,6 +11,7 @@ const Wrapper = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
+  overflow-y: scroll;
   background-color: rgba(0, 0, 0, .9 );
   display: flex;
   justify-content: center;

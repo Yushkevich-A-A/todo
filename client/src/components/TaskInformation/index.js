@@ -14,11 +14,28 @@ import FormCreateComment from 'components/Forms/FormCreateComment';
 import ButtonText from 'components/ButtonText';
 
 const Container = styled.div`
-  margin: 5px;
   padding: 15px;
   border: 1px solid #c4c4c4;
   border-radius: 5px;
-  width: 700px;
+  transition: height 0.2s;
+`;
+
+const ButtonDeleteBlock = styled.div`
+  display: flex;
+`;
+
+const Line = styled.div` 
+  height: 2px;
+  background: linear-gradient(to right, #f3f3f3, grey, #f3f3f3);
+  margin-bottom: 10px;
+`;
+
+const BlockAddComment = styled.div` 
+  position: relative;
+`;
+
+const BlockCommentList = styled.div` 
+
 `;
 
 function ItemInformation(props) {
@@ -39,17 +56,28 @@ function ItemInformation(props) {
 
   return (
     <Container>
-      <Button type='delete' handleClick={handleDeleteClick}/>
+      <ButtonDeleteBlock>
+        <Button type='delete' handleClick={handleDeleteClick}/>
+      </ButtonDeleteBlock>
       <BlockName task={task} />
+      <Line />
       <Description task={task} />
+      <Line />
       <Priority task={task} />
+      <Line />
       <Times task={task} />
+      <Line />
       <OtherTasksBlock task={task} />
+      <Line />
       <FileLoader task={task} />
-      { !openModal && <ButtonText  type='add' handleClick={() => setOpenModal(true)}>Добавить комментарий</ButtonText> }
-      { openModal && <FormCreateComment main_comment={firstCommentlist} closeForm={() => setOpenModal(false)}/> }
-      <CommentsList comments={task.comments}/>
-      
+      <Line />
+      <BlockAddComment>
+        <ButtonText  type='add' handleClick={() => setOpenModal(true)}>Добавить комментарий</ButtonText>
+        { openModal && <FormCreateComment main_comment={firstCommentlist} closeForm={() => setOpenModal(false)}/> }
+      </BlockAddComment>
+      <BlockCommentList>
+        <CommentsList comments={task.comments}/>
+      </BlockCommentList>
     </Container>
   )
 }

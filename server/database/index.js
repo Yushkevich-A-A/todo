@@ -15,7 +15,18 @@ const db = [
         priority: 'up-middle',
         files:[],
         other_tasks: [],
-        comments: [],
+        comments: [
+          {
+          name: "Антон",
+          message: "Привет Мир",
+          id_main_comment: null,
+          id_project: "ob5hAYt",
+          id_task: "7nKdnQ",
+          id: "49a37c0a-603c-44f2-b2c0-6924f25b7fdc",
+          created: 1670186525748,
+          comments: []
+        }
+        ],
       },
       {
         id: "nQI5bFqZEqHPph2m",

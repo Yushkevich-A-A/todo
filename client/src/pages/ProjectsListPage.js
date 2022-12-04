@@ -9,6 +9,7 @@ import Input from 'components/elements/Input';
 import styled, { css } from 'styled-components';
 
 const Container = styled.div`
+  position: ralative;
   opacity: 0;
   transition: opacity 0.5s;
   ${ props =>  props.transition && css`opacity: 1;`}

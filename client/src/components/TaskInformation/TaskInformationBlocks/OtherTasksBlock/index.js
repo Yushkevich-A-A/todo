@@ -20,6 +20,14 @@ const Title = styled.div`
   margin-bottom: 10px;
 `;
 
+const ButtonsBlock = styled.div`
+  display: flex;
+  & div {
+    min-width: 100px;
+    margin-left: 0;
+  }
+`;
+
 const TasksList = styled.div``;
 
 function OtherTasksBlock(props) {
@@ -60,12 +68,14 @@ function OtherTasksBlock(props) {
             task.other_tasks.map( item => <OtherTask key={item.id} other_task={item} />)
           }
         </TasksList>
-        {!openAdd && <ButtonText handleClick={() => setOpenAdd(true)}>Добавить элемент</ButtonText>}
+        {!openAdd && <ButtonText handleClick={() => setOpenAdd(true)}>Добавить подзадачу</ButtonText>}
 
         {openAdd && <>
           <Textarea value={text} name='new_task' handleChange={handleChange} placeholder='Добавьте описание задачи'/>
-          <ButtonText type='add' handleClick={addOtherTask}>Добавить</ButtonText>
-          <ButtonText handleClick={resetFieldText}>Отмена</ButtonText>
+          <ButtonsBlock>
+            <ButtonText type='add' handleClick={addOtherTask}>Добавить</ButtonText>
+            <ButtonText handleClick={resetFieldText}>Отмена</ButtonText>
+          </ButtonsBlock>
         </>}
     </Container>
   )

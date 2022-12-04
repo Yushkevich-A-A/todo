@@ -12,8 +12,14 @@ const Form = styled.form`
 const FilesPreview = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
   padding: 10px;
 `
+
+const Label = styled.label`
+  display: block;
+  margin-bottom: 10px;
+`;
 
 
 function FileLoader(props) {
@@ -48,7 +54,7 @@ function FileLoader(props) {
       <Form ref={ref} onSubmit={handleSubmit} method="post" action="#" id="#">
             <div>
               <div>
-                <label>Прикрепите файлы </label>
+                <Label>Прикрепите файлы </Label>
                 <input type="file" onChange={handlerChange}/>
               </div>
             </div>

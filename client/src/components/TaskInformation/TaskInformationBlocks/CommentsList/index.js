@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Comment from 'components/TaskInformation/TaskInformationBlocks/CommentsList/Comment';
 
 const Container = styled.div`
-  padding: 0 0 0 20px;
+  margin-left: 15px;
 
 `;
 

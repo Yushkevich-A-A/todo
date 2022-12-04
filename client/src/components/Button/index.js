@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import deleteIcon from 'assets/icons/delete.svg';
-import edit from 'assets/icons/edit.svg';
+import comment from 'assets/icons/comment.svg';
 import close from 'assets/icons/close.svg';
 import save from 'assets/icons/save.svg';
 
@@ -41,9 +41,9 @@ const ButtonType = styled.div`
               border-color: green;
             }
           `
-        case 'edit':
+        case 'comment':
           return css`
-            background-image: url(${edit});
+            background-image: url(${comment});
           `
         default: 
             return;

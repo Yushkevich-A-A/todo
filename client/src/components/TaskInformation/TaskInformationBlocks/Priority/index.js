@@ -7,6 +7,16 @@ const Container = styled.div`
 position: relative;`;
 
 const Label = styled.div`
+  color: white;
+  border-radius: 5px;
+  width: 120px;
+  text-align: center;
+  padding: 5px;
+  margin: 5px;
+  cursor: pointer;
+  background-color
+  transition: background-color 0.2s;
+
   ${(props) => {
     switch (props.data) {
       case "low":
@@ -33,13 +43,6 @@ const Label = styled.div`
         return;
     }
 }}
-color: white;
-border-radius: 5px;
-width: 120px;
-text-align: center;
-padding: 5px;
-margin: 5px;
-cursor: pointer;
 `
 
 const Title = styled.div`

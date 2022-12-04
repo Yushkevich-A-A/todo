@@ -17,7 +17,12 @@ const Container = styled.div`
 `
 
 const Main = styled.main`
+  overflow-x: scroll;
   padding-top: 10px;
+`;
+const MainContainer = styled.main`
+  padding-top: 10px;
+  min-width: 900px;
 `;
 
 const BlockLists = styled.div`
@@ -124,16 +129,18 @@ function ProjectPage() {
         </InputsBlock>
       </Header>
       <Main>
-        <DragDropContext onDragEnd={onDragEnd}>
-          <BlockLists>
-            {
-              project.columns.map( column => <TasksList key={column.id} column={column} project={project} tasks={
-                column.tasks.map( item => filterList.find( task => task.id === item)).filter(item => item )
-                }/>
-              )
-            }
-          </BlockLists>
-        </DragDropContext>
+        <MainContainer>
+          <DragDropContext onDragEnd={onDragEnd}>
+            <BlockLists>
+              {
+                project.columns.map( column => <TasksList key={column.id} column={column} project={project} tasks={
+                  column.tasks.map( item => filterList.find( task => task.id === item)).filter(item => item )
+                  }/>
+                )
+              }
+            </BlockLists>
+          </DragDropContext>
+        </MainContainer>
       </Main>
     </Container>
     }

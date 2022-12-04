@@ -10,16 +10,16 @@ import { parse } from 'date-fns/esm';
 setDefaultOptions({locale: ru});
 
 const BlockTime = styled.div`
-
+  width: 50%;
+  padding-left: 15px;
+  padding-right: 15px
 `
 
 const TitleTime = styled.div`
-  width: 200px;
+  max-width: 200px;
+  width: 100%;
 `
-
-const FinalDate = styled.div`
-
-`
+const FinalDate = styled.div``;
 
 const DateBlock = styled.div`;
     font-size: 14px;
