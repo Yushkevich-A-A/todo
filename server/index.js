@@ -47,7 +47,6 @@ app.put('/api/projects', (req, res) => {
 app.delete('/api/projects', (req, res) => {
   const deleteProjectIndex = db.findIndex( item => item.id === req.body.id );
   db.splice(deleteProjectIndex, 1);
-  console.log(req.body.id);
 
   if (fs.existsSync(`${__dirname}/public/folders/${req.body.id}`)) {
     fs.rmdirSync(`${__dirname}/public/folders/${req.body.id}`, {recursive: true, force: true})
@@ -88,7 +87,6 @@ app.delete('/api/task', (req, res) => {
   edittingcolumn.splice(indexInColumn, 1);
 
   fs.rmdirSync(`${__dirname}/public/folders/${req.body.id_project}/${req.body.id}`, {recursive: true, force: true})
-  console.log(edittingcolumn);
   res.send(edittingProject);
 });
 

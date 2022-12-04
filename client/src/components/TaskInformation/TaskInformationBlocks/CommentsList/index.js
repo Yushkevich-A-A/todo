@@ -12,7 +12,6 @@ const Container = styled.div`
 
 function CommentsList(props) {
   const { comments } = props;
-  console.log(comments);
   return (
     <Container>
       {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import ButtonText from 'components/ButtonText';
 import Input from 'components/elements/Input';
 import Textarea from 'components/elements/Textarea';
@@ -21,10 +21,22 @@ const FormComment = styled.div`
   margin-bottom: 10px;
   background-color: white;
   box-shadow: 0 0 0 1pt #d7d7d7;
+  ${ props => {
+    return props.inputError && css`
+    border-radius: 2pt;
+    box-shadow: 0 0 0 1pt red;
+   `
+ } }
 }
 
 & textarea {
   box-shadow: 0 0 0 1pt #d7d7d7;
+  ${ props => {
+    return props.textareaError && css`
+    border-radius: 2pt;
+    box-shadow: 0 0 0 1pt red;
+   `
+ } }
 }
 `;
 const ButtonsBlock = styled.div`
@@ -38,12 +50,17 @@ const ButtonsBlock = styled.div`
 function FormCreateComment(props) {
   const { closeForm, main_comment } = props;
   const dispatch = useDispatch();
+  const [ errorMark, setError ] = useState(false);
   const [ form, setForm ] = useState({
     name: '',
     message: '',
   })
 
   const handleSubmit = () => {
+    if ( Object.keys(form).find( item => form[item] === '' ) ) {
+      setError(true);
+      return;
+    }
     dispatch({type: 'ADD_COMMENT_SAGA', payload: {
       ...form,
       id_main_comment: main_comment.id,
@@ -62,7 +79,10 @@ function FormCreateComment(props) {
 
   return (
     <AddComment>
-      <FormComment>
+      <FormComment 
+        onClick={() => {errorMark && setError(false)}} 
+        inputError={errorMark && form.name === ''} 
+        textareaError={errorMark && form.message === ''}>
         <Input type='text' value={form.name} name='name' handleChange={handleChange} placeholder='Укажите имя' />
         <Textarea  value={form.message} name='message' handleChange={handleChange} placeholder='Введите сообщение'/>
       </FormComment>

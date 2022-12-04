@@ -15,6 +15,17 @@ const Container = styled.div`
   ${ props =>  props.transition && css`opacity: 1;`}
 `
 
+const Text = styled.div`
+  color: grey;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  padding: 10px;  
+  opacity: 0;
+  transition: opacity 0.5s;
+  ${ props =>  props.ahead && css`opacity: 1;`}
+`
+
 function ProjectsListPage() {
   const [ isOpen, setOpenModal ] = useState(false);
   const list = useSelector( state => state.manageProject);
@@ -57,6 +68,7 @@ function ProjectsListPage() {
       </Header>
       <main>
         <ListProject list={filterList}/>
+        { list.length === 0 && <Text ahead={list.length === 0 }>Нет действующих проектов</Text> }
         {
           isOpen && <ModalWindow title="Создание проекта" closeModal={closeModalWindow}>
             <FormProject closeModal={closeModalWindow}/>

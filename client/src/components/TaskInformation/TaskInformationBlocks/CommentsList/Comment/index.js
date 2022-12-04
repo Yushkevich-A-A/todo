@@ -5,6 +5,7 @@ import FormCreateComment from 'components/Forms/FormCreateComment';
 import CommentsList from 'components/TaskInformation/TaskInformationBlocks/CommentsList';
 import Avatar from 'components/TaskInformation/TaskInformationBlocks/CommentsList/Comment/Avatar';
 import Button from 'components/Button';
+import { format } from 'date-fns';
 
 const WrapperContainer = styled.div`
   position: relative;
@@ -81,7 +82,7 @@ function Comment(props) {
         <InfoBlock> 
           <HeadComment>
             <Name>{comment.name}</Name>
-            <DateComment>{comment.created}</DateComment>
+            <DateComment>{format(comment.created, 'dd-MM-yyyy HH:mm')}</DateComment>
           </HeadComment>
           <Message>{comment.message}</Message>
           { openModal && <FormCreateComment main_comment={comment} closeForm={() => setOpenModal(false)}/> }

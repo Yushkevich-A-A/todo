@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import OtherTask from 'components/TaskInformation/TaskInformationBlocks/OtherTasksBlock/ChangeOtherTask';
 import Textarea from 'components/elements/Textarea';
 import ButtonText from 'components/ButtonText';
@@ -20,6 +20,17 @@ const Title = styled.div`
   margin-bottom: 10px;
 `;
 
+const TeatareaBlock = styled.div`
+  & textarea {
+    ${ props => {
+      return props.errorMark && css`
+      border-radius: 2pt;
+      box-shadow: 0 0 0 1pt red;
+     `
+   } }
+  }
+`;
+
 const ButtonsBlock = styled.div`
   display: flex;
   & div {
@@ -34,6 +45,7 @@ function OtherTasksBlock(props) {
   const { task } = props;
   const dispatch = useDispatch();
   const [  text, setText ] = useState('');
+  const [ errorMark, setError ] = useState(false);
   const [ openAdd, setOpenAdd ] = useState(false);
 
   useEffect( () => {
@@ -42,6 +54,7 @@ function OtherTasksBlock(props) {
 
   const addOtherTask = () => {
     if (text.trim() === '') {
+      setError(true);
       return;
     }
     dispatch({ type: "ADD_ADDITIONAL_TASK_SAGA", payload: {
@@ -71,7 +84,9 @@ function OtherTasksBlock(props) {
         {!openAdd && <ButtonText handleClick={() => setOpenAdd(true)}>Добавить подзадачу</ButtonText>}
 
         {openAdd && <>
-          <Textarea value={text} name='new_task' handleChange={handleChange} placeholder='Добавьте описание задачи'/>
+          <TeatareaBlock errorMark={errorMark} onClick={() => {errorMark && setError(false)}}>
+            <Textarea value={text} name='new_task' handleChange={handleChange} placeholder='Добавьте описание задачи'/>
+          </TeatareaBlock>
           <ButtonsBlock>
             <ButtonText type='add' handleClick={addOtherTask}>Добавить</ButtonText>
             <ButtonText handleClick={resetFieldText}>Отмена</ButtonText>

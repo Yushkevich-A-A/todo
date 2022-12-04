@@ -1,7 +1,7 @@
 const db = [
   { 
     id: 'ob5hAYt',
-    name: "Первый тестовый поект",
+    name: "Первый тестовый проект",
     desription: "тестовый проект создания TODO листа для демонстрации навыйков разработки",
     task_list: [
       {
@@ -86,7 +86,7 @@ const db = [
   },
   { 
     id: 'ob5hAYtP5P0olajRvbmfN',
-    name: "Бэк на сервене",
+    name: "Бэк на сервере",
     desription: "разработка сервеной части",
     task_list: [],
     columns: [

@@ -53,7 +53,7 @@ function ItemTask(props) {
           {...provided.dragHandleProps}
           onClick={openModal}
           >
-            {task.name}
+            №{task.number} {task.name}
           </ItemElement>
         )}
       </Draggable>

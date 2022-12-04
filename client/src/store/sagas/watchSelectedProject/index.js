@@ -59,7 +59,6 @@ function* workerAddFilesTask(action) {
 }
 
 function* workerDeleteFilesTask(action) {
-  console.log(action.payload );
   const editedProject = yield call(deleteData, 'task/files' , action.payload );
   yield put({ type:'EDIT_PROJECT', payload: { editedProject }});
 }
