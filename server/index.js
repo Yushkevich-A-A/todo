@@ -5,18 +5,9 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const port = process.env.PORT || 3001;
-const { data } = require('./database');
+const { db } = require('./database');
 const {createNewProject, createNewTask, createAdditionalTask, createFileObj, createNewComment } = require('./lib');
-const e = require('express');
 const { reqursion } = require('./lib/reqursion');
-const { cloneDeep } = require('lodash');
-
-
-
-const db = cloneDeep(data);
-
-console.log(db)
-setInterval( () => {db = cloneDeep(data)}, 1000*60*60 );
 
 
 app.use(fileUpload({createParentPath: true}));
@@ -31,6 +22,36 @@ app.use('/static', express.static(__dirname + '/public/build/static'));
 app.get('/api/projects', (req, res) => {
   res.send(db);
 });
+
+const initFolder = () => {
+  db.forEach( (item) => {
+    fs.access(`${__dirname}/public/folders/${item.id}`, (err) => {
+        if (err && err.code === 'ENOENT') {
+          fs.mkdir(`${__dirname}/public/folders/${item.id}`, err => {
+            if (err) {
+              throw err
+            }
+            console.log('Directory is created.')
+          })
+        }
+      });
+    item.task_list.forEach( (task) => {
+
+      fs.access(`${__dirname}/public/folders/${item.id}`, (err) => {
+        if (err && err.code === 'ENOENT') {
+          fs.mkdir(`${__dirname}/public/folders/${task.id_project}/${task.id}`, err => {
+            if (err) {
+              throw err
+            }
+            console.log('Directory is created.')
+          })
+        }
+      });
+    });
+  });
+}
+
+initFolder();
 
 // ручки создания и изменения проекта
 
@@ -70,7 +91,7 @@ app.post('/api/task', (req, res) => {
   const numberForNewTask = Math.max( ...edittingProject.task_list.map( item => item.number )) + 1;
 
   const newTask = createNewTask({
-    ...req.body.data, 
+    name: req.body.name, 
     number: numberForNewTask,
     id_project: req.body.id_project,
   });

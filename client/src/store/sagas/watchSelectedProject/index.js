@@ -3,7 +3,6 @@ import { call, put, fork, all, takeLatest, takeLeading } from 'redux-saga/effect
 
 function* workerAddTask(action) {
   const editedProject = yield call(postData, 'task' , action.payload );
-
   yield put({ type:'EDIT_PROJECT', payload: { editedProject }});
 }
 

@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import Button from 'components/Button';
+import { useNavigate } from 'react-router-dom';
 
 const HeaderComponent = styled.header`
   display: flex;
@@ -21,9 +23,16 @@ const Title = styled.h1`
 
 
 function Header(props) {
-  const { title } = props;
+  const { title, back } = props;
+  let navigate = useNavigate();
+
+  const handleClick = (id) => {
+    return navigate(`/`);
+  }
+
   return (
     <HeaderComponent>
+      { back && <Button handleClick={handleClick} type='back' />}
       <Title>{ title }</Title>
       {
         props.children

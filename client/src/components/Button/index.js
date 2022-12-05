@@ -5,6 +5,7 @@ import deleteIcon from 'assets/icons/delete.svg';
 import comment from 'assets/icons/comment.svg';
 import close from 'assets/icons/close.svg';
 import save from 'assets/icons/save.svg';
+import back from 'assets/icons/back.svg';
 
 const ButtonType = styled.div`
   min-width: 30px;
@@ -44,6 +45,11 @@ const ButtonType = styled.div`
         case 'comment':
           return css`
             background-image: url(${comment});
+          `
+        case 'back':
+          return css`
+            background-image: url(${back});
+            background-size: contain;
           `
         default: 
             return;

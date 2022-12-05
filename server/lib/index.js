@@ -41,8 +41,11 @@ function createNewTask(data) {
     finish_date: null,
     status: 'queue',
     other_tasks: [],
+    priority: 'middle',
     comments: [],
+    files: [],
   }
+
   return odj;
 } 
 

@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 import ButtonText from 'components/ButtonText';
 import Input from 'components/elements/Input';
+import Line from 'components/elements/Line';
 
 const Container = styled.div`
   opacity: 0;
@@ -23,6 +24,14 @@ const Main = styled.main`
 const MainContainer = styled.main`
   padding-top: 10px;
   min-width: 900px;
+`;
+
+const MainDespription = styled.p`
+  margin: 0 30px 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  color: grey;
 `;
 
 const BlockLists = styled.div`
@@ -118,7 +127,7 @@ function ProjectPage() {
   return (
     <>
     { project && <Container transition={transition}>
-      <Header title={project.name}>
+      <Header back={true} title={project.name}>
         <InputsBlock >
           <ButtonText handleClick={searchTrigger}>{search === 'name' ?  'по номеру' : 'по имени'}</ButtonText>
           <Input 
@@ -129,6 +138,8 @@ function ProjectPage() {
         </InputsBlock>
       </Header>
       <Main>
+        <MainDespription>{project.description}</MainDespription>
+        <Line />
         <MainContainer>
           <DragDropContext onDragEnd={onDragEnd}>
             <BlockLists>

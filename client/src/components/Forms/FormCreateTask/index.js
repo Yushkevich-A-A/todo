@@ -60,7 +60,7 @@ function FormCreateTask(props) {
     dispatch({ type: 'CREATE_NEW_TASK_SAGA', payload: {
       column_id: column_id,
       id_project: project.id,
-      data: formTask,
+      name: formTask.name,
     }})
     closeHandler();
   }

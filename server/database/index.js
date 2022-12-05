@@ -1,8 +1,8 @@
-const data = [
+const db = [
   { 
     id: 'ob5hAYt',
     name: "Первый тестовый проект",
-    desription: "тестовый проект создания TODO листа для демонстрации навыйков разработки",
+    description: "тестовый проект создания TODO листа для демонстрации навыйков разработки",
     task_list: [
       {
         id: "7nKdnQ",
@@ -87,7 +87,7 @@ const data = [
   { 
     id: 'ob5hAYtP5P0olajRvbmfN',
     name: "Бэк на сервере",
-    desription: "разработка сервеной части",
+    description: "разработка сервеной части",
     task_list: [],
     columns: [
       {
@@ -107,5 +107,5 @@ const data = [
 ]
 
 module.exports = {
-  data,
+  db,
 }

@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import CommentsList from 'components/TaskInformation/TaskInformationBlocks/CommentsList';
 import FormCreateComment from 'components/Forms/FormCreateComment';
 import ButtonText from 'components/ButtonText';
+import Line from 'components/elements/Line';
 
 const Container = styled.div`
   padding: 15px;
@@ -22,12 +23,6 @@ const Container = styled.div`
 
 const ButtonDeleteBlock = styled.div`
   display: flex;
-`;
-
-const Line = styled.div` 
-  height: 2px;
-  background: linear-gradient(to right, #f3f3f3, grey, #f3f3f3);
-  margin-bottom: 10px;
 `;
 
 const BlockAddComment = styled.div` 

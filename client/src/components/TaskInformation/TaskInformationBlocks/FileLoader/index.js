@@ -27,7 +27,6 @@ function FileLoader(props) {
   const [ file, setFiles ] = useState([]);
   const dispatch = useDispatch();
   const ref = useRef(null);
-
   const handleSubmit = (e) => {
     e.preventDefault();
   }
